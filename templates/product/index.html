@@ -1,0 +1,136 @@
+{% extends 'product/base.html' %}
+
+{% load product_tag %}
+
+{% load static %}
+
+{% block title %} Игрушки оптом в Одессе {% endblock title %}
+
+{% block content %}
+<!-- Slider/Intro Section Start -->
+<div class="intro11-slider-wrap section">
+    <div class="intro11-slider swiper-container">
+        <div class="swiper-wrapper">
+          
+          {% for image in imagehome_list.all %}
+            <!-- Intro Content Start -->
+            <div class="intro11-section swiper-slide slide-bg-1 bg-position " style="background-image: url({{ image.image.url }}); background-color: rgba(215, 177, 190, 0.9);">
+                <div class="intro11-content text-left">
+                    {% if image.status %}
+                        <h3 class="title-slider text-uppercase">{{ image.status }}</h3>
+                    {% endif %}
+                    {% if image.title %}
+                        <h2 class="title">{{ image.title }}</h2>
+                    {% endif %}
+                    {% if image.up_title %}
+                        <b><p class="desc-content" style="color: #28a745">{{ image.up_title }}</p></b>
+                    {% endif %}
+                    {% if image.product %} 
+                        <a href="{{ image.product.get_absolute_url }}" class="btn flosun-button secondary-btn theme-color  rounded-0">{{ image.btn_name }}</a>
+                    {% endif %}
+                    {% if image.news %}
+                        <a href="{{ image.news.get_absolute_url }}" class="btn flosun-button secondary-btn theme-color  rounded-0">{{ image.btn_name }}</a>
+                    {% endif %}
+                    {% if image.slug %}
+                        <a href="{{ image.slug }}" class="btn flosun-button secondary-btn theme-color  rounded-0">{{ image.btn_name }}</a>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Intro Content End -->
+          {% endfor %}
+        
+        </div>
+        <!-- Slider Navigation -->
+        <div class="home1-slider-prev swiper-button-prev main-slider-nav"><i class="lnr lnr-arrow-left"></i></div>
+        <div class="home1-slider-next swiper-button-next main-slider-nav"><i class="lnr lnr-arrow-right"></i></div>
+        <!-- Slider pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<!-- Slider/Intro Section End -->
+
+<!--Product Area Start-->
+<div class="product-area mt-text-2" style="margin-bottom:50px">
+    <div class="container custom-area-2 overflow-hidden">
+        <div class="row">
+            <!--Section Title Start-->
+            <div class="col-12 col-custom">
+                <div class="section-title text-center mb-30">
+                    <span class="section-title-1">Новинки</span>
+                    <h3 class="section-title-3" style="font-size: 24px">Новые поступления {{get_all_product}}</h3>
+                </div>
+            </div>
+            <!--Section Title End-->
+        </div>
+        <div class="row product-row">
+            <div class="col-12 col-custom">
+           
+                <div class="product-slider swiper-container anime-element-multi">
+                    <div class="swiper-wrapper">
+                        {% get_last_product %}
+                    </div>
+                    <!-- Slider pagination -->
+                    <div class="swiper-pagination default-pagination"></div>
+                </div>
+           
+            </div>
+        </div>
+    </div>
+</div>
+<!--Product Area End-->
+
+<!-- History Area Start Here -->
+{% include "include/history.html" %}
+<!-- History Area End Here -->
+
+<!-- Blog Area Start Here -->
+<div class="blog-post-area mt-text-3">
+    <div class="container custom-area">
+        <div class="row">
+            <!--Section Title Start-->
+            <div class="col-12">
+                <div class="section-title text-center mb-30">
+                    <span class="section-title-1">Новости</span>
+                    <h3 class="section-title-3" style="font-size: 24px">Последние посты</h3>
+                </div>
+            </div>
+            <!--Section Title End-->
+        </div>
+        <div class="row">
+
+            {% get_last_news %}
+
+        </div>
+    </div>
+</div>
+<!-- Blog Area End Here -->
+
+<!-- Testimonial Area Start Here -->
+<div class="testimonial-area mt-text-2" style="margin-bottom: 30px">
+    <div class="container custom-area">
+        <div class="row">
+            <!--Section Title Start-->
+            <div class="col-12 col-custom">
+                <div class="section-title text-center">
+                    <span class="section-title-1">Отзывы наших клиентов</span>
+                    <h3 class="section-title-3" style="font-size: 24px">последние отзывы</h3>
+                </div>
+            </div>
+            <!--Section Title End-->
+        </div>
+        <div class="row">
+            <div class="testimonial-carousel swiper-container intro11-carousel-wrap col-12 col-custom">
+                <div class="swiper-wrapper">  
+                   {% get_last_review %}             
+                </div>
+                <!-- Slider Navigation -->
+                <div class="home1-slider-prev swiper-button-prev main-slider-nav"><i class="lnr lnr-arrow-left"></i></div>
+                <div class="home1-slider-next swiper-button-next main-slider-nav"><i class="lnr lnr-arrow-right"></i></div>
+                <!-- Slider pagination -->
+                <div class="swiper-pagination default-pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Testimonial Area End Here -->
+{% endblock content %}

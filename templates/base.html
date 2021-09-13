@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load static %}
+<html class="no-js" lang="ru">
+  <head>
+      <title>{% block title %} {% endblock title %}</title>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+      <meta http-equiv="cleartype" content="on">  
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta http-equiv="Cache-Control" content="no-cache">
+      <meta name="csrf-token" content="{{ csrf_token }}">
+      <link href="https://" rel="canonical">
+      <link href="https://" rel="alternate" hreflang="ru">
+      <meta name="keywords" content="игрушки оптом в одессе, игрушки оптом, игрушки оптом украина, детские игрушки оптом, детские игрушки оптом украина, игрушки, детские товары" />
+      <meta name="description" content="грушки оптом в Одессе с доставкой по Украине. Широкий ассортимент детских игрушек оптом и в розницу.">
+      <!-- Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-TRS08ENL0W"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-TRS08ENL0W');
+      </script>
+      <!-- Favicon -->
+      <link rel="shortcut icon" type="image/x-icon" href="{% static "images/favicon.ico" %}">
+      <!-- CSS  ============================================ -->
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="{% static "css/vendor/bootstrap.min.css" %}">
+      <!-- Font Awesome CSS -->
+      <link rel="stylesheet" href="{% static "css/vendor/font.awesome.min.css" %}">
+      <!-- Linear Icons CSS -->
+      <link rel="stylesheet" href="{% static "css/vendor/linearicons.min.css" %}">
+      <!-- Swiper CSS -->
+      <link rel="stylesheet" href="{% static "css/plugins/swiper-bundle.min.css" %}">
+      <!-- Animation CSS -->
+      <link rel="stylesheet" href="{% static "css/plugins/animate.min.css" %}">
+      <!-- Main Style CSS -->
+      <link rel="stylesheet" href="{% static "css/style.css" %}">
+  </head>
+ 
+  <body>
+    <!--===== Pre-Loading area Start =====-->
+    <div id="preloader">
+        <div class="preloader">
+            <div class="spinner-block">
+                <h1 class="spinner spinner-3 mb-0">.</h1>
+            </div>
+        </div>
+    </div>
+    <!--==== Pre-Loading Area End ====-->
+
+    {% include "include/header.html" %}
+
+      {% block content %}
+      
+      {% endblock content %}
+
+    {% include "include/footer.html" %}
+
+    <!-- Scroll to Top Start -->
+    <a class="scroll-to-top" href="#">
+        <i class="lnr lnr-arrow-up"></i>
+    </a>
+    <!-- Scroll to Top End -->
+    <!-- JS  ============================================ -->
+    <!-- jQuery JS -->
+    <script src="{% static "js/vendor/jquery-3.5.1.min.js" %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static "js/vendor/bootstrap.bundle.min.js" %}"></script>
+    <!-- Swiper Slider JS -->
+    <script src="{% static "js/plugins/swiper-bundle.min.js" %}"></script>
+    <!-- Main JS -->
+    <script src="{% static "js/main.js" %}"></script>
+    <!-- Card Plus - Minus JS -->
+    <script src="{% static "js/ajax.js" %}"></script>
+
+    {% block script %}
+      
+    {% endblock script %}
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{% load contact_tags %}
+<!-- Newsletter Area Start Here -->
+<div class="news-letter-area mt-text-6 pb-text-4" style="margin-top: 40px; margin-bottom: -20px">
+    <div class="container custom-area">
+        <div class="row align-items-center">
+            <!--Section Title Start-->
+            <div class="col-md-6 col-custom">
+                <div class="section-title text-left mb-35">
+                    <h3 class="section-title-3">Подписивайся</h3>
+                    <p class="desc-content mb-0">Введите свой адрес электронной почты для нашего списка рассылки, чтобы держать тебя в курсе.</p>
+                </div>
+            </div>
+            <!--Section Title End-->
+            <div class="col-md-6 col-custom">
+                <div class="news-latter-box">
+                    {% contact_form %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Newsletter Area End Here -->

@@ -1,0 +1,31 @@
+{% for product in last_products %}
+    <!--Single Product Start-->
+    <div class="single-item swiper-slide">
+        <div class="single-product position-relative mb-30">
+            <div class="product-image">
+                <a class="d-block" href="{% url 'category_list' %}{{product.category.category.slug}}/{{product.category.slug}}/{{product.slug}}">
+                    <img src="{{ product.poster.url }}" alt="" class="product-image-1 w-100">
+                </a>
+                {% if product.status %}
+                    <span class="onsale">{{ product.status }}</span>
+                {% endif %}
+                <div class="add-action d-flex flex-column position-absolute">
+                    <a href="{{ product.get_absolute_url }}" title="Подробнее">
+                        <i class="lnr lnr-eye" data-placement="left" ></i>
+                    </a>
+                </div>
+            </div>
+            <div class="product-content">
+                <div class="product-title">
+                    <h4 class="title-2"> <a href="{% url 'category_list' %}{{product.category.category.slug}}/{{product.category.slug}}/{{product.slug}}">{{ product.title }}</a></h4>
+                </div>
+                <div class="price-box">
+                    <h3><span class="badge bg-success">{{product.retail}} грн</span></h3>
+                    <span class="old-price"><del></del></span>
+                </div>
+                <a href="{% url 'category_list' %}{{product.category.category.slug}}/{{product.category.slug}}/{{product.slug}}" class="btn product-cart">Подробнее</a>
+            </div>
+        </div>
+    </div>
+    <!--Single Product End-->
+{% endfor %}

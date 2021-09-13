@@ -1,0 +1,112 @@
+{% extends 'product/base.html' %}
+{% load product_tag %}
+{% load static %}
+
+{% block title %} Поиск товара {% endblock title %}
+
+{% block content %}
+<!-- Breadcrumb Image -->
+{% include "include/breadcrumbsImage.html" %}
+<!-- Breadcrumb Image End -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Результат поиска</li>
+  </ol>
+</nav>
+<!-- Shop Main Area Start Here -->
+<div class="shop-main-area" style="margin-bottom: 30px">
+    <div class="container container-default custom-area">
+        <div class="row flex-row-reverse">
+            <div class="col-12 col-md-12">
+                <!--shop toolbar start-->
+                <div class="shop_toolbar_wrapper mb-30">
+                    <div class="shop_toolbar_btn">
+                        <button data-role="grid_list" type="button" class="active btn-list" title="List"><i class="fa fa-th-list"></i></button>
+                        <button data-role="grid_4" type="button" class="btn-grid-3" title="Grid"><i class="fa fa-th"></i></button>
+                    </div>
+                    <div class="search-box-offcanvas">
+                        <form action="{% url 'search' %}" method="get">
+                            <input type="search" name="q" required="" placeholder="Поиск товара...">
+                            <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <!--shop toolbar end-->
+
+                <!-- Shop Wrapper Start -->
+                <div class="row shop_wrapper grid_list">
+                    
+                    {% for product in product_list %}
+                        <div class="col-12 col-custom product-area product-search">
+                            <div class="product-item" style="min-height: 200px;">
+                                <div class="single-product position-relative mr-0 ml-0">
+                                    <div class="product-image">
+                                        <a class="d-block" href="{% url 'category_list' %}{{product.category.category.slug}}/{{product.category.slug}}/{{product.slug}}">
+                                            <img src="{{ product.poster.url }}" class="product-image-1 w-100" alt="{{ product.title }}">      
+                                        </a>
+                                        {% if product.status %}
+                                            <span class="onsale">{{ product.status }}</span>
+                                        {% endif %}
+                                        <div class="add-action d-flex flex-column position-absolute">
+                                            <a href="{% url 'category_list' %}{{product.category.category.slug}}/{{product.category.slug}}/{{product.slug}}" title="Подробнее">
+                                                <i class="lnr lnr-eye" data-placement="left" ></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="product-content">
+                                        <div class="product-title">
+                                            <h4 class="title-2"> <a href="{% url 'category_list' %}{{product.category.category.slug}}/{{product.category.slug}}/{{product.slug}}">{{ product.title }}</a></h4>
+                                        </div>                               
+                                        <div class="price-box">
+                                            <h2><span class="badge bg-success">{{product.retail}} грн</span></h2>
+                                            <span class="old-price"><del></del></span>
+                                        </div>                        
+                                        <button href="{% url 'category_list' %}{{product.category.category.slug}}/{{product.category.slug}}/{{product.slug}}" class="btn product-cart">Подробнее</button>
+                                    </div>
+                                    <div class="product-content-listview" style="margin-bottom: -60px">
+                                        <div class="product-title">
+                                            <h4 class="title-2"> <a href="{% url 'category_list' %}{{product.category.category.slug}}/{{product.category.slug}}/{{product.slug}}">{{ product.title }}</a></h4>
+                                        </div>
+                                        <div class="price-box">
+                                            <h2><span class="badge bg-success">{{product.retail}} грн</span></h2>
+                                        </div>
+                                        {% if product.description_free %}
+                                            <p class="desc-content">
+                                                {{product.description_free}}
+                                            </p>
+                                        {% endif %}
+                                        <br/>
+                                        {% include "include/productButton.html" %}
+                                        <br/>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    
+                </div>
+                <!-- Shop Wrapper End -->
+                <!-- Bottom Toolbar Start -->
+                <div class="row">
+                    <div class="col-sm-12 col-custom">
+                        <div class="toolbar-bottom">
+                            
+                            {% include "include/pagination.html" with page=product_list %}					
+                            
+                            {% if number %}
+                                <p class="desc-content text-center text-sm-right mb-0">{{ number }} - результатов</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <!-- Bottom Toolbar End -->
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+<!-- Shop Main Area End Here -->
+{% endblock content %}

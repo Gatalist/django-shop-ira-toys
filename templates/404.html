@@ -1,0 +1,37 @@
+{% extends 'product/base.html' %}
+
+{% block title %} Страница не найдена {% endblock title %}
+
+{% block content %}
+<!-- Breadcrumb Image -->
+{% include "include/breadcrumbsImage.html" %}
+<!-- Breadcrumb Image End -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Страница не найдена</li>
+  </ol>
+</nav>
+
+{% block content %}
+<!-- Error 404 Area Start Here -->
+<div class="error-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="error_form">
+                    <h1>404</h1>
+                    <h2>Оппс! СТРАНИЦА НЕ НАЙДЕНА</h2>
+                    <p>Извините, но страница, которую вы ищете, не существует, была удалена, имя изменено или временно недоступно.</p>
+                    <form action="{% url 'search' %}" method="get">
+                        <input type="search" name="q" required="" placeholder="Поиск товара...">
+                        <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+                    </form>
+                    <a href="{% url 'index' %}">Вернуться на главную </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Error 404 Area End Here -->
+{% endblock content %}

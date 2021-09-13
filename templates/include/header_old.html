@@ -1,0 +1,88 @@
+{% load product_tag %}
+{% load static %}
+
+<!-- Header Area Start Here -->
+<header class="main-header-area">
+	<!-- Main Header Area Start -->
+	<div class="main-header header-transparent header-sticky">
+		<div class="container-fluid">
+			<div class="row align-items-center">
+				<div class="col-lg-2 col-xl-2 col-md-6 col-6 col-custom">
+					<div class="header-logo d-flex align-items-center">
+						<a href="{% url 'index' %}">
+							<img class="img-full" src="{% static 'images/logo/logo.png' %}" alt="Header Logo">
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-8 d-none d-lg-flex justify-content-center col-custom">
+					<nav class="main-nav d-none d-lg-flex">
+						<ul class="nav">
+							<li>
+								<a class="active" href="{% url 'index' %}">
+									<span class="menu-text">Главная</span>
+								</a>
+							</li>
+							<li>
+		                  <a href="{% url 'category_list' %}">
+		                     <span class="menu-text">Каталог</span>
+		                     <i class="fa fa-angle-down"></i>
+		                  </a>
+		                  <div class="mega-menu dropdown-hover">
+		                     {% get_categories as categories %}
+									{% for category in categories %}
+			                            
+			                     <div class="menu-colum">
+			                        <ul>
+												<!-- категория -->
+												<li><span class="mega-menu-text"><a href="{% url 'category_list' %}{{ category.slug }}">{{ category.name }}</a></span></li>  
+															                                    
+	                                    <!-- подкатегория -->
+	                                    {% get_sub_categories as sub_categories %}
+									 				{% for sub_category in sub_categories %}
+	                                  		{% if sub_category.category == category %}
+	                                    		<li><a href="{% url 'category_list' %}{{category.slug}}/{{sub_category.slug}}">{{sub_category.name}}</a></li>
+	                                    	{% endif %}
+	                                    {% endfor %}
+	                              </ul>
+			                     </div>
+		                     {% endfor %}
+		                  </div>
+		               </li>
+
+							<li>
+								<a href="{% url 'new_product_list' %}">
+									<span class="menu-text">Новинки</span>
+									<i class="fa fa-angle-down"></i>
+								</a>
+								<ul class="dropdown-submenu dropdown-hover">
+									{% get_date as dates %}
+									{% for date in dates %}
+										<li><a href="{% url 'new_product' date %}">Поступление {{ date }}</a></li>
+									{% endfor %}
+								</ul>
+							</li>
+							<li>
+								<a href="{% url 'news' %}">
+									<span class="menu-text">Новости</span>
+								</a>
+							</li>
+							<li>
+								<a href="{% url 'about' %}">
+									<span class="menu-text">О нас</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+				
+				{% include "include/basket.html" %}
+
+			</div>
+		</div>
+	</div>
+	<!-- Main Header Area End -->
+	
+	{% include "include/mobile_menu.html" %}
+
+</header>
+<!-- Header Area End Here -->

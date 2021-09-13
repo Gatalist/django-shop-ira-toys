@@ -1,0 +1,66 @@
+{% if page_obj %}
+	<div class="pagination">
+		<ul>
+			{% if page_obj.has_previous %}
+		
+				<li><a href="?{{q}}page={{ page_obj.previous_page_number }}"> &lt; </a></li>
+				{% if page_obj.number|add:-2 %}
+					<li><span>...</span></li>
+				{% endif %}
+
+			{% endif %}
+
+			{% for p in paginator.page_range %}
+				{% if page_obj.number == p %}
+
+					<li class="current">{{ p }}</li>
+
+				{% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+
+				<li><a href="?{{q}}page={{ p }}">{{ p }}</a></li>
+
+				{% endif %}
+			{% endfor %}
+
+			{% if page_obj.has_next %}
+				{% if page_obj.number|add:2 < page_obj.paginator.num_pages %}
+					<li><span>...</span></li>
+				{% endif %}
+				
+				<li><a href="{{q}}page={{ page_obj.next_page_number }}"> &gt; </a></li>
+				
+			{% endif %}			
+		</ul>
+	</div>
+					
+{% else %}				
+
+<div class="pagination">
+    <ul>
+        {% if page.has_previous %}
+			<li><a href="?{{q}}page={{ page.previous_page_number }}"> &lt; </a></li>
+			{% if page.number|add:-2 %}
+				<li><span>...</span></li>
+			{% endif %}
+			
+        {% endif %}
+
+		{% if page.number|add:-1 > page.paginator.num_pages %}
+			<li><a href="?{{q}}page={{ page.number|add:-1 }}">{{ page.number|add:-1 }}</a></li>
+		{% endif %}
+		
+		<li class="current">{{ page.number }}</li>
+
+		{% if page.number|add:1 <= page.paginator.num_pages %}
+			<li><a href="?{{q}}page={{ page.number|add:1 }}">{{ page.number|add:1 }}</a></li>
+		{% endif %}
+		        
+        {% if page.has_next %}
+			{% if page.number|add:2 < page.paginator.num_pages %}
+				<li><span>...</span></li>
+			{% endif %}	
+			<li><a href="?{{q}}page={{ page.next_page_number }}"> &gt; </a></li>
+        {% endif %}
+    </ul>
+</div>
+{% endif %}
