@@ -1,0 +1,44 @@
+{% extends 'product/base.html' %}
+{% load product_tag %}
+{% load static %}
+
+{% block title %} Поиск товара {% endblock title %}
+
+{% block content %}
+<!-- Breadcrumb Image -->
+{% include "include/breadcrumbsImage.html" %}
+<!-- Breadcrumb Image End -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Результат поиска</li>
+  </ol>
+</nav>
+<!-- Shop Main Area Start Here -->
+<div class="shop-main-area" style="margin-bottom: 30px">
+    <div class="container container-default custom-area">
+        <div class="row flex-row-reverse">
+            <div class="col-12 col-md-12">
+                <!--shop toolbar start-->
+                <div class="shop_toolbar_wrapper mb-30">
+                    <div class="shop_toolbar_btn">
+                        <button data-role="grid_list" type="button" class="active btn-list" title="List"><i class="fa fa-th-list"></i></button>
+                        <button data-role="grid_4" type="button" class="btn-grid-3" title="Grid"><i class="fa fa-th"></i></button>
+                    </div>
+                    <div class="search-box-offcanvas">
+                        <form action="{% url 'search' %}" method="get">
+                            <input type="search" name="q" required="" placeholder="Поиск товара...">
+                            <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <!--shop toolbar end-->
+
+                {% include "include/product.html" %}
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Shop Main Area End Here -->
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends 'product/base.html' %}
+
+{% load static %}
+
+{% load contact_tags %}
+
+{% block title %} Заказ успешно оформлен {% endblock title %}
+
+{% block content %}
+<!-- Breadcrumb Image -->
+{% include "include/breadcrumbsImage.html" %}
+<!-- Breadcrumb Image End -->
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'basket_detail' %}">Корзина</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'basket_detail' %}">Оформление заказа</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Заказ успешно оформлен</li>
+  </ol>
+</nav>
+
+<!-- Order acceped Start Here -->
+<div class="error-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="error_form">
+                    <h2>Мы свяжемся с вами для уточнения заказа</h2>
+                    <p>Номер вашего заказа: {{order}}</p>
+                    <a href="{% url 'index' %}">На главную</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Order acceped End Here -->
+<!-- Newsletter Area Start Here -->
+{% include "include/contact_email.html" %}
+<!-- Newsletter Area End Here -->
+{% endblock content %}
+
+{% block script %}
+
+<!-- form validation JS -->
+<script src="{% static "js/contact.js" %}"></script>
+      
+{% endblock script %}

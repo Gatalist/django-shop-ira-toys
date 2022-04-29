@@ -1,0 +1,148 @@
+{% extends 'product/base.html' %}
+
+{% block title %} Корзина заказа {% endblock title %}
+
+{% block content %}
+<!-- Breadcrumb Image -->
+{% include "include/breadcrumbsImage.html" %}
+<!-- Breadcrumb Image End -->
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Корзина заказа</li>
+  </ol>
+</nav>
+
+{% include "include/info_order_sum.html" %}
+
+<!-- Compare Area Start Here -->
+<div class="compare-area mt-no-text mb-no-text" style="margin-top: 50px; margin-bottom: 50px">
+    <div class="container container-default-2 custom-area">
+        <div class="row clear-table-all">
+            {% if products_in_basket.count == 0 %}
+                <div style="min-height: 200px; margin-top: 120px">
+                    <h3 class="text-center" >Корзина пустая</h3>
+                </div>
+                
+            {% else %}
+                <div class="col-sm-12">
+                    <!-- Compare Page Content Start -->
+                    <div class="compare-page-content-wrap">
+                        <div class="compare-table table-responsive">
+                            <table class="table table-bordered mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td class="first-column">Товар</td>
+                                        {% for product in products_in_basket %}
+                                            <td class="pro-thumbnail" data-td-id="{{product.id}}">
+                                                <a href="{% url 'category_list' %}{{product.product.category.category.slug}}/{{product.product.category.slug}}/{{product.product.slug}}">
+                                                    <img class="img-fluid" src="{{product.poster.url}}" width="100">
+                                                </a>
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr>
+                                        <td class="first-column">Название</td>
+                                        {% for product in products_in_basket %}
+                                            <td class="pro-title" data-td-id="{{product.id}}">
+                                                <a href="{% url 'category_list' %}{{product.product.category.category.slug}}/{{product.product.category.slug}}/{{product.product.slug}}">{{product.product}}</a>
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr>
+                                        <td class="first-column">Цена</td>
+                                        {% for product in products_in_basket %}
+                                            <td class="pro-price" data-td-id="{{product.id}}">
+                                                {% if request.session.valuta == 'USD' %}
+                                                    <span class="pro-price-table">{{product.product.retail_usd}}</span><span> $</span>
+                                                {% elif request.session.valuta == 'EUR' %}
+                                                    <span class="pro-price-table">{{product.product.retail_eur}}</span><span> €</span>
+                                                {% elif request.session.valuta == 'ГРН' %}
+                                                    <span class="pro-price-table">{{product.product.retail_uah}}</span><span> грн</span>
+                                                {% else %}
+                                                    <span class="pro-price-table">{{product.product.retail_usd}}</span><span> $</span>
+                                                {% endif %}
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr>
+                                        <td class="first-column">Шт.</td>
+                                        {% for product in products_in_basket %}
+                                            <td class="pro-quantity" data-td-id="{{product.id}}">
+                                                <form class="product-table-plus-minus" action="{% url 'basket_adding' %}">
+                                                    {% csrf_token %}
+                                                    <input class="cart-plus-minus-box form-control table-plus-minus" style="max-width:200px; margin: 0 auto;" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{product.nmb}}" type="number" data-id="{{product.id}}" data-image="{{product.poster.url}}">     
+                                                <form>
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr>
+                                        <td class="first-column">Сумма</td>
+                                        {% for product in products_in_basket %}
+                                            <td class="pro-subtotal" data-td-id="{{product.id}}">
+                                                {% if request.session.valuta == 'USD' %}
+                                                    <span class="pro-subtotal-table">{{product.total_price_usd}}</span><span> $</span>
+                                                {% elif request.session.valuta == 'EUR' %}
+                                                    <span class="pro-subtotal-table">{{product.total_price_eur}}</span><span> €</span>
+                                                {% elif request.session.valuta == 'ГРН' %}
+                                                    <span class="pro-subtotal-table">{{product.total_price_uah}}</span><span> грн</span>
+                                                {% else %}
+                                                    <span class="pro-subtotal-table">{{product.total_price_usd}}</span><span> $</span>
+                                                {% endif %}
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr>
+                                        <td class="first-column">Удалить</td>
+                                        {% for product in products_in_basket %}
+                                            <td class="pro-remove" data-td-id="{{product.id}}">
+                                                <form class="remove-product-table" method="post" action="{% url 'basket_adding' %}">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="pro-remove-table" data-id="{{product.id}}">
+                                                        <i class="lnr lnr-trash" style="font-size: 18px"></i>
+                                                    </button>	
+                                                <form>
+                                            </td>  
+                                        {% endfor %}      
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- Compare Page Content End -->
+                </div>
+
+                <div class="col-lg-5 ml-auto col-custom">
+                    <!-- Cart Calculation Area -->
+                    <div class="cart-calculator-wrapper">
+                        <div class="cart-calculate-items">
+                            <h3>Общая сумма заказа</h3>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr class="total">
+                                        <td>Сумма</td>
+                                        {% if request.session.valuta == 'USD' %}
+                                            <td class="total-amount-table">{{all_sum}} $</td>
+                                        {% elif request.session.valuta == 'EUR' %}
+                                            <td class="total-amount-table">{{all_sum}} €</td>
+                                        {% elif request.session.valuta == 'ГРН' %}
+                                            <td class="total-amount-table">{{all_sum}} грн</td>
+                                        {% else %}
+                                            <td class="total-amount-table">{{all_sum}} $</td>
+                                        {% endif %}
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <a href="{% url 'checkout' %}"  class="btn flosun-button primary-btn rounded-0 black-btn w-100 btn_sum_active">Оформить</a>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+<!-- Compare Area End Here -->
+
+{% endblock content %}

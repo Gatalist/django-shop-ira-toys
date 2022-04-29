@@ -1,0 +1,232 @@
+{% extends 'product/base.html' %}
+
+{% load static %}
+
+{% block title %} {{product.title}} {% endblock title %}
+
+{% block content %}
+<!-- Breadcrumb Image -->
+{% include "include/breadcrumbsImage.html" %}
+<!-- Breadcrumb Image End -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'category_list' %}">Категории</a></li>
+    <li class="breadcrumb-item"><a href="{{category.get_absolute_url}}">{{category}}</a></li>
+    <li class="breadcrumb-item"><a href="{{category.get_absolute_url}}{{subcategory.slug}}">{{subcategory}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{product.title}}</li>
+  </ol>
+</nav>
+
+<!-- Single Product Main Area Start -->
+<div class="single-product-main-area">
+    <div class="container container-default custom-area">
+        <h2 class="section-title-2 text-center">{{ product.title }}</h2>
+        
+        <br/>
+        <div class="row">
+            <div class="col-lg-5 offset-lg-0 col-md-8 offset-md-2 col-custom">
+                <div class="product-details-img">
+                    <div class="single-product-img swiper-container gallery-top popup-gallery">
+                        <div class="swiper-wrapper">
+                            {% for image in product.productimage_set.all %}
+                                <div class="swiper-slide">
+                                    <img class="w-100" src="{{ image.image.url }}" alt="Product">
+                                </div>
+							{% endfor %}
+                        </div>
+                    </div>
+                    <div class="single-product-thumb swiper-container gallery-thumbs">
+                        <div class="swiper-wrapper">
+                            {% for image in product.productimage_set.all %}
+                                <div class="swiper-slide">
+                                    <img class="w-100" src="{{ image.image.url }}" alt="Product">
+                                </div>
+							{% endfor %}
+                        </div>
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next swiper-button-white"><i class="lnr lnr-arrow-right"></i></div>
+                        <div class="swiper-button-prev swiper-button-white"><i class="lnr lnr-arrow-left"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-custom">
+                <div class="product-summery position-relative">    
+                    <div class="price-box mb-2">
+                        <!-- price -->
+                        {% include "include/price.html" %}
+                    </div>
+                    <h4 class="section-title-2"><span class="badge bg-danger">ID: {{ product.id }}</span></h4>
+                    <br/>
+                    {% if product.material %}
+                        <div class="alert alert-primary" role="alert">
+                            Материал — {{product.material}}
+                        </div>
+                    {% endif %}
+                    
+                    {% if product.country %}
+                        <div class="alert alert-secondary" role="alert">
+                            Страна — {{product.country}}
+                        </div>
+                    {% endif %}
+
+                    {% if product.packaging %}
+                        <div class="alert alert-success" role="alert">
+                            Упаковка — {{product.packaging}}
+                        </div>
+                    {% endif %}
+                        
+                    {% if product.size %}
+                        <div class="alert alert-danger" role="alert">
+                            Размер — {{product.size}}
+                        </div>
+                    {% endif %}
+                </div>
+                <br/>
+                <br/>
+
+                {% include "include/availability.html" %}
+                
+            </div>
+        </div>
+        <div class="row mt-no-text">
+            <div class="col-lg-12 col-custom">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active text-uppercase" id="home-tab" data-toggle="tab" href="#connect-1" role="tab" aria-selected="true">Описание</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" id="review-tab" data-toggle="tab" href="#connect-4" role="tab" aria-selected="false">После заказа</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" id="contact-tab" data-toggle="tab" href="#connect-3" role="tab" aria-selected="false">Доставка</a>
+                    </li>
+                </ul>
+                <div class="tab-content mb-text" id="myTabContent">
+                    <div class="tab-pane fade show active" id="connect-1" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="desc-content">
+                            {{product.description | safe}}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="connect-4" role="tabpanel" aria-labelledby="review-tab">
+                        <div class="size-tab table-responsive-lg">
+                            <p class="desc-content mb-2">
+                            1. На указанный номер телефона и адрес электронной почты вы получите сообщение о том, что ваш заказ передан на обработку.
+                            Срок обработки — от 10 минут до нескольких часов. Как правило, обработка заказов происходит день в день.</p> 
+                            <p class="desc-content mb-2">
+                            2. Оператор интернет-магазина проверит наличие товара и свяжется с вами для уточнения всех деталей.</p> 
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="connect-3" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="shipping-policy">
+                            <h4 class="title-3 mb-4">Политика доставки нашего магазина</h4>
+                            
+                            <p class="desc-content mb-2">Отправляем заказы по всей Украине. Как только заказ будет передан перевозчику — вы получите номер экспресс-накладной по SMS или сообщением в Viber. По прибытии товаров в отделение, вы получите SMS или сообщение в Viber. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Single Product Main Area End -->
+
+<!-- Blog Main Area Start Here -->
+<div class="blog-main-area">
+    <div class="container container-default custom-area">
+        <div class="row">
+            <div class="col-12 col-custom widget-mt">
+                
+                <!-- Blog Comments Area Start Here -->
+                <form action="{% url 'add_review' product.id %}" method="post" id="formReview">
+                    {% csrf_token %}
+                    <input type="hidden" name="parent" id="contactparent" value="">
+                    <div class="comment-box">
+                        <h3>Добавить комментарий</h3>
+                        <div class="row">
+
+                            <div class="col-md-6 col-custom">
+                                <div class="input-item mb-4">
+                                    <input name="name" class="border rounded-0 w-100 input-area name" type="text" placeholder="Имя">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-custom">
+                                <div class="input-item mb-4">
+                                    <input name="email" class="border rounded-0 w-100 input-area email" type="text" placeholder="Email">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-custom">
+                                <div class="input-item mt-4 mb-4">
+                                    <textarea id="contactcomment" cols="30" rows="5" name="text" class="border rounded-0 w-100 custom-textarea input-area" placeholder="Сообщение"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-custom mt-40">
+                                <button type="submit" class="btn flosun-button primary-btn rounded-0 w-100">Опубликовать</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- Blog Comments Area End Here -->
+
+                <!-- Blog Details wrapper Area Start -->
+                <div class="blog-post-details">
+                    <section class="blog-post-wrapper product-summery">
+                        <div class="comment-area-wrapper mt-5">
+                            <div class="comments-view-area">
+                                <h3 class="mb-5">Комментариев - {{ product.get_review.count }} </h3>
+                                
+                                {% for review in product.get_review %}
+                                    <div class="single-comment-wrap mb-4 d-flex">
+                                        <figure class="author-thumb">
+                                            <a href="#">
+                                                <img src="{% static 'images/review/baby.jpg' %}" alt="Author">
+                                            </a>
+                                        </figure>
+                                        <div class="comments-info">
+                                            <p class="mb-2">{{ review.text }}</p>
+                                            <div class="comment-footer d-flex justify-content-between">
+                                                <a href="#" class="author"><strong>{{ review.name }}</strong> - {{ review.dateAdd }}</a>    
+                                                <a href="#formReview" onclick="addReview('{{ review.name }}', '{{ review.id }}')" class="btn-reply"><i class="fa fa-reply"></i>Ответить</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    {% for rew in review.reviews_set.all %}
+                                        <div class="single-comment-wrap mb-4 comment-reply d-flex">
+                                            <figure class="author-thumb">
+                                                <a href="#">
+                                                    <img src="{% static 'images/review/baby.jpg' %}" alt="Author">
+                                                </a>
+                                            </figure>
+                                            <div class="comments-info">
+                                                <p class="mb-2">{{ rew.text }}</p>
+                                                <div class="comment-footer d-flex justify-content-between">
+                                                    <a href="#" class="author"><strong>{{ rew.name }}</strong> - {{ rew.dateAdd}}</a> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                
+                                {% endfor %}
+                                
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- Blog Details Wrapper Area End -->
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog Main Area End Here -->
+<script> 
+    function addReview(name, id) {
+        document.getElementById("contactparent").value = id;
+        document.getElementById("contactcomment").innerText = `${name}, `;
+    }
+</script
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% if request.session.valuta %}
+    {% if request.session.valuta == 'USD' %}
+        <h2><span class="badge bg-success">{{product.retail_usd}} $</span></h2>
+    {% elif request.session.valuta == 'EUR' %}
+        <h2><span class="badge bg-success">{{product.retail_eur}} €</span></h2>
+    {% elif request.session.valuta == 'ГРН' %}
+        <h2><span class="badge bg-success">{{product.retail_uah}} грн</span></h2>
+    {% endif %}
+{% else %}
+    <h2><span class="badge bg-success">{{product.retail_usd}} $</span></h2>
+{% endif %}
+<span class="old-price"><del></del></span>

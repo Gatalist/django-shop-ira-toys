@@ -1,0 +1,15 @@
+{% load product_tag %}
+
+
+<!-- Bottom Toolbar Start -->
+<div class="row">
+	<div class="col-sm-12 col-custom" style='padding-top: 50px'>
+		<div class="toolbar-bottom">
+			
+			{% include "include/pagination.html" %}					
+				
+			<p class="desc-content text-center text-sm-right mb-0">{% get_all_news %} - новости</p>
+		</div>
+	</div>
+</div>
+<!-- Bottom Toolbar End -->
