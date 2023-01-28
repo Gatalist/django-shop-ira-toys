@@ -1,0 +1,80 @@
+{% load static i18n product_tag %}
+
+<!-- Mobile menu start -->
+<aside class="off-canvas-wrapper" id="mobileMenu">
+	<div class="off-canvas-overlay"></div>
+	<div class="off-canvas-inner-content">
+		<div class="btn-close-off-canvas"><i class="fa fa-times"></i></div>
+		<div class="off-canvas-inner">
+			<!-- mobile menu search -->
+			<div class="search-box-offcanvas">
+				<form action="{% url 'search' %}" method="get">
+					<input type="search" name="q" required="" placeholder="{% trans 'Поиск товара...' %}">
+					<button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+				</form>
+			</div>
+			<div class="offcanvas-widget-area">
+				<div class="switcher">
+					<div class="language">
+						<span class="title"><b>{% trans 'Язык:'%}</b> </span>
+						<div class="switcher-menu">
+							<ul>
+								<li>
+									<a href="#">{% if LANGUAGE_CODE == 'ru' %}RU 🇷🇺{% elif LANGUAGE_CODE == 'uk' %}UK 🇺🇦{% endif %}</a>
+									<ul class="switcher-dropdown">
+										<li><a href="{% url 'set-language' 'uk' %}">UK 🇺🇦</a></li>
+										<li><a href="{% url 'set-language' 'ru' %}">RU 🇷🇺</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mobile-navigation">
+				<!-- mobile menu navigation start -->
+				<nav>
+					<ul class="mobile-menu">
+						<li><a href="{% url 'index' %}">{% trans "Главная" %}</a></li>
+						<li class="menu-item-has-children"><a href="#">{% trans "Каталог" %}</a>
+							<ul class="megamenu dropdown">
+							{% get_categories as categories %}
+							{% for category in categories %}
+								<li class="mega-title has-children"><a href="#">{{category.name}}</a>
+									<ul class="dropdown">
+										<!-- подкатегория -->
+											{% get_sub_categories as sub_categories %}
+											{% for sub_category in sub_categories %}
+											{% if sub_category.category == category %}
+												<li style="padding: 10px 15px 8px;"><a href="{% url 'category_list' %}{{category.slug}}/{{sub_category.slug}}">{{ sub_category.name }}</a></li>
+											{% endif %}
+										{% endfor %}
+									</ul>
+								</li>
+							{% endfor %}
+							</ul>
+						</li>
+						<li class="menu-item-has-children "><a href="#">{% trans "Новинки" %}</a>
+							<ul class="dropdown">
+								{% get_date as dates %}
+								{% for date in dates %}
+									<li><a href="{% url 'new_product' date %}">{% trans "Поступление" %} {{ date }}</a></li>
+								{% endfor %}
+							</ul>
+						</li>
+						<li><a href="{% url 'news' %}">{% trans "Новости" %}</a></li>
+						<li><a href="{% url 'about' %}">{% trans "О нас" %}</a></li>
+					</ul>
+				</nav>
+				<!-- mobile menu navigation end -->
+			</div>
+			<!-- mobile menu end -->
+			<div class="offcanvas-widget-area">
+				<div class="top-info-wrap text-left text-black">
+					{% include "include/contact.html" %}
+				</div>
+			</div>
+		</div>
+	</div>
+</aside>
+<!-- Mobile menu end -->

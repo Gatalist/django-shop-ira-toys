@@ -1,0 +1,8 @@
+{% load i18n %}
+<div class="newsletter-form-wrap text-center">
+    <form id="mc-form" class="mc-form" action="{% url 'contact' %}" method="post">
+        {% csrf_token %}
+        {{ contact_form }}
+        <button id="mc-submit" class="btn rounded-0" type="submit">{% trans "Подписаться" %}</button>
+    </form>
+</div>

@@ -1,0 +1,463 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-20 14:18+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#: templates/404.html:3 templates/404.html:12 templates/500.html:3
+#: templates/500.html:12
+msgid "Страница не найдена"
+msgstr "Сторінку не знайдено"
+
+#: templates/404.html:11 templates/500.html:11 templates/include/header.html:21
+#: templates/include/mobile_menu.html:38 templates/product/about.html:12
+#: templates/product/basket_detail.html:12
+#: templates/product/category_list.html:12 templates/product/checkout.html:12
+#: templates/product/new_product_list.html:12 templates/product/news.html:12
+#: templates/product/news_detail.html:12
+#: templates/product/order_accepted.html:12
+#: templates/product/product_detail.html:12
+#: templates/product/product_list.html:10
+#: templates/product/product_search.html:12
+#: templates/product/sub_category_list.html:12
+msgid "Главная"
+msgstr "Головна"
+
+#: templates/404.html:23
+msgid "Оппс! СТРАНИЦА НЕ НАЙДЕНА"
+msgstr "Уппс! СТОРІНКУ НЕ ЗНАЙДЕНО"
+
+#: templates/404.html:24 templates/500.html:25
+msgid ""
+"Извините, но страница, которую вы ищете, не существует, была удалена, имя "
+"изменено или временно недоступно."
+msgstr ""
+"Вибачте, але сторінка, яку ви шукаєте, не існує, була видалена, ім'я змінено "
+"або тимчасово недоступне."
+
+#: templates/404.html:26 templates/500.html:27
+#: templates/include/mobile_menu.html:12
+#: templates/product/new_product_list.html:32
+#: templates/product/product_list.html:29
+#: templates/product/product_search.html:29
+msgid "Поиск товара..."
+msgstr "Пошук товару..."
+
+#: templates/404.html:29 templates/500.html:30
+msgid "Вернуться на главную"
+msgstr "Повернутися на головну"
+
+#: templates/500.html:24
+msgid "Оппс! Ошибка сервера"
+msgstr "Уппс! Помилка сервера"
+
+#: templates/contact/tags/email_form.html:6
+msgid "Подписаться"
+msgstr "Підписатися"
+
+#: templates/include/basket.html:134
+msgid "Сумма заказа :"
+msgstr "Сума замовлення :"
+
+#: templates/include/contact.html:6 templates/include/footer.html:14
+msgid "Viber группа"
+msgstr "Viber група"
+
+#: templates/include/contact_email.html:10
+msgid "Подписывайся"
+msgstr "Підписуйся"
+
+#: templates/include/contact_email.html:11
+msgid ""
+"Введите свой адрес электронной почты для нашего списка рассылки, чтобы "
+"держать тебя в курсе."
+msgstr ""
+"Введіть свою адресу електронної пошти для нашого списку розсилки, щоб "
+"тримати тебе в курсі."
+
+#: templates/include/footer.html:9 templates/product/about.html:36
+msgid "Контакты"
+msgstr "Контакти"
+
+#: templates/include/footer.html:40
+msgid "Все права защищены."
+msgstr "Всі права захищені."
+
+#: templates/include/header.html:25 templates/include/mobile_menu.html:39
+msgid "Каталог"
+msgstr "Каталог"
+
+#: templates/include/header.html:44 templates/include/mobile_menu.html:57
+#: templates/product/index.html:53
+msgid "Новинки"
+msgstr "Новинки"
+
+#: templates/include/header.html:50 templates/include/mobile_menu.html:61
+#: templates/product/new_product_list.html:15
+msgid "Поступление"
+msgstr "Надходження"
+
+#: templates/include/header.html:57 templates/include/mobile_menu.html:65
+#: templates/product/index.html:114 templates/product/news.html:4
+#: templates/product/news.html:13 templates/product/news_detail.html:13
+msgid "Новости"
+msgstr "Новини"
+
+#: templates/include/header.html:61 templates/include/mobile_menu.html:66
+#: templates/product/about.html:4 templates/product/about.html:13
+msgid "О нас"
+msgstr "Про нас"
+
+#: templates/include/history.html:10
+msgid "Маленькая история о нас"
+msgstr "Маленька історія про нас"
+
+#: templates/include/history.html:18
+msgid "«Игрульки от Ирульки»"
+msgstr "«Игрульки от Ирульки»"
+
+#: templates/include/history.html:19
+msgid ""
+"Наш магазин специализируется на игрушках европейского, китайского и "
+"украинского производства. Ассортимент товара постоянно расширяется. Наши "
+"сотрудники посвящают много времени поиску новых производителей с целью "
+"совершенствования как качества продукции, так и ее цены."
+msgstr ""
+"Наш магазин спеціалізується на іграшках європейського, китайського та "
+"українського виробництва. Асортимент товару постійно розширюється. Наші "
+"співробітники присвячують багато часу пошуку нових виробників з "
+"метоювдосконалення як якості продукції, і її ціни."
+
+#: templates/include/history.html:21
+msgid "Наша цель"
+msgstr "Наша мета"
+
+#: templates/include/history.html:22
+msgid ""
+"Дарить, удивлять и немножечко дуреть, наполняя жизнь позитивными эмоциями. "
+"Мы верим, что взрослых не существует, поэтому ассортимент магазина «Игрульки "
+"от Ирульки» настолько широк, что найти подходящую игрушку можно как для "
+"новорожденного ребенка, так и для взрослого."
+msgstr ""
+"Дарувати, дивувати і трошки дуріти, наповнюючи життя позитивними емоціями. "
+"Ми віримо, що дорослих не існує, тому асортимент магазину «Игрульки от "
+"Ирульки» настільки широкий, що знайти відповідну іграшку можна як для "
+"новонародженої дитини, так і для дорослої."
+
+#: templates/include/info_order_sum.html:3
+msgid "Обратите внимание!"
+msgstr "Зверніть увагу!"
+
+#: templates/include/info_order_sum.html:3
+msgid "Мы не принимаем заказы меньше"
+msgstr "Ми не приймаємо замовлення менше"
+
+#: templates/include/mobile_menu.html:19
+msgid "Язык:"
+msgstr "Мова:"
+
+#: templates/include/product.html:5
+msgid "Нет товаров"
+msgstr "Немає товарів"
+
+#: templates/include/product.html:33 templates/product/category_list.html:32
+#: templates/product/index.html:77 templates/product/index.html:89
+#: templates/product/news.html:39 templates/product/sub_category_list.html:33
+#: templates/product/tags/last_news.html:12
+msgid "Подробнее"
+msgstr "Детальніше"
+
+#: templates/include/product.html:64
+msgid "результатов"
+msgstr "результатів"
+
+#: templates/include/productButton.html:21
+msgid "В корзину"
+msgstr "До кошику"
+
+#: templates/product/about.html:27
+msgid "Наше расположение"
+msgstr "Наше розташування"
+
+#: templates/product/about.html:28
+msgid "Украина / г. Одесса / 7 км"
+msgstr "Україна / м. Одеса / 7 км"
+
+#: templates/product/about.html:45
+msgid "Поддержка"
+msgstr "Підтримка"
+
+#: templates/product/basket_detail.html:4
+#: templates/product/basket_detail.html:13
+msgid "Корзина заказа"
+msgstr "Кошик замовлення"
+
+#: templates/product/basket_detail.html:23
+msgid "Корзина пустая"
+msgstr "Кошик порожній"
+
+#: templates/product/basket_detail.html:33
+msgid "Товар"
+msgstr "Товар"
+
+#: templates/product/basket_detail.html:43
+msgid "Название"
+msgstr "Назва"
+
+#: templates/product/basket_detail.html:51
+msgid "Цена"
+msgstr "Ціна"
+
+#: templates/product/basket_detail.html:68
+msgid "Шт."
+msgstr "Шт."
+
+#: templates/product/basket_detail.html:81
+#: templates/product/basket_detail.html:124
+msgid "Сумма"
+msgstr "Сума"
+
+#: templates/product/basket_detail.html:98
+msgid "Удалить"
+msgstr "Видалити"
+
+#: templates/product/basket_detail.html:120
+msgid "Общая сумма заказа"
+msgstr "Загальна сума замовлення"
+
+#: templates/product/basket_detail.html:133
+msgid "Оформить"
+msgstr "Оформити"
+
+#: templates/product/category_list.html:4
+#: templates/product/category_list.html:13
+#: templates/product/product_detail.html:13
+#: templates/product/product_list.html:11
+#: templates/product/sub_category_list.html:13
+msgid "Категории"
+msgstr "Категорії"
+
+#: templates/product/checkout.html:4 templates/product/checkout.html:14
+#: templates/product/order_accepted.html:14
+msgid "Оформление заказа"
+msgstr "Оформлення замовлення"
+
+#: templates/product/checkout.html:13 templates/product/order_accepted.html:13
+msgid "Корзина"
+msgstr "Кошик"
+
+#: templates/product/checkout.html:26
+msgid "Форма заказа"
+msgstr "Форма замовлення"
+
+#: templates/product/checkout.html:29 templates/product/product_detail.html:134
+msgid "Имя"
+msgstr "Ім'я"
+
+#: templates/product/checkout.html:31 templates/product/checkout.html:37
+#: templates/product/checkout.html:43 templates/product/checkout.html:49
+#: templates/product/checkout.html:55
+msgid "Принято!"
+msgstr "Прийнято!"
+
+#: templates/product/checkout.html:32
+msgid "Введите ваше Имя!"
+msgstr "Введіть ваше ім'я!"
+
+#: templates/product/checkout.html:35
+msgid "Фамилия"
+msgstr "Прізвище"
+
+#: templates/product/checkout.html:38
+msgid "Введите вашу Фамилию!"
+msgstr "Введіть ваше Прізвище!"
+
+#: templates/product/checkout.html:41
+msgid "Город"
+msgstr "Місто"
+
+#: templates/product/checkout.html:44
+msgid "Введите ваш Город!"
+msgstr "Введіть ваше Місто!"
+
+#: templates/product/checkout.html:47
+msgid "Телефон"
+msgstr "Телефон"
+
+#: templates/product/checkout.html:50
+msgid "Введите ваш Телефон!"
+msgstr "Введіть ваш телефон!"
+
+#: templates/product/checkout.html:56
+msgid "Введите ваш Email!"
+msgstr "Введіть ваш Email!"
+
+#: templates/product/checkout.html:60
+msgid "Оформить заказ"
+msgstr "Оформити замовлення"
+
+#: templates/product/checkout.html:67
+msgid "Ваш заказ"
+msgstr "Ваше замовлення"
+
+#: templates/product/checkout.html:92
+msgid "Сумма заказа"
+msgstr "Сума замовлення"
+
+#: templates/product/index.html:4
+msgid "Игрушки оптом в Одессе"
+msgstr "Іграшки оптом в Одесі"
+
+#: templates/product/index.html:54
+msgid "Новые поступления"
+msgstr "Нові надходження"
+
+#: templates/product/index.html:115
+msgid "Последние посты"
+msgstr "Останні пости"
+
+#: templates/product/index.html:131
+msgid "Отзывы наших клиентов"
+msgstr "Відгуки наших клієнтів"
+
+#: templates/product/index.html:132
+msgid "Последние отзывы"
+msgstr "Останні відгуки"
+
+#: templates/product/new_product_list.html:13
+msgid "Все новинки"
+msgstr "Усі новинки"
+
+#: templates/product/news.html:23
+msgid "Нет новостей"
+msgstr "Немає новин"
+
+#: templates/product/news.html:52
+msgid "новости"
+msgstr "новини"
+
+#: templates/product/order_accepted.html:4
+#: templates/product/order_accepted.html:15
+msgid "Заказ успешно оформлен"
+msgstr "Замовлення успішно оформлено"
+
+#: templates/product/order_accepted.html:24
+msgid "Мы свяжемся с вами для уточнения заказа"
+msgstr "Ми зв'яжемося з вами для уточнення замовлення"
+
+#: templates/product/order_accepted.html:25
+msgid "Номер вашего заказа:"
+msgstr "Номер вашого замовлення"
+
+#: templates/product/order_accepted.html:26
+msgid "На главную"
+msgstr "На головну"
+
+#: templates/product/product_detail.html:60
+msgid "Материал"
+msgstr "Матеріал"
+
+#: templates/product/product_detail.html:65
+msgid "Страна"
+msgstr "Країна"
+
+#: templates/product/product_detail.html:70
+msgid "Упаковка"
+msgstr "Упаковка"
+
+#: templates/product/product_detail.html:75
+msgid "Размер"
+msgstr "Розмір"
+
+#: templates/product/product_detail.html:88
+msgid "Описание"
+msgstr "Опис"
+
+#: templates/product/product_detail.html:91
+msgid "После заказа"
+msgstr "Після замовлення"
+
+#: templates/product/product_detail.html:94
+msgid "Доставка"
+msgstr "Доставка"
+
+#: templates/product/product_detail.html:103
+msgid ""
+"1. На указанный номер телефона и адрес электронной почты вы получите "
+"сообщение о том, что ваш заказ передан на обработку.\n"
+"                            Срок обработки — от 10 минут до нескольких "
+"часов. Как правило, обработка заказов происходит день в день."
+msgstr ""
+"1. На вказаний номер телефону та адресу електронної пошти ви отримаєте "
+"повідомлення про те, що ваше замовлення передано на обробку.\n"
+"                            Термін обробки - від 10 хвилин до "
+"декількохгодин. Як правило, обробка замовлень відбувається день у день."
+
+#: templates/product/product_detail.html:105
+msgid ""
+"2. Оператор интернет-магазина проверит наличие товара и свяжется с вами для "
+"уточнения всех деталей."
+msgstr ""
+"2. Оператор інтернет-магазину перевірить наявність товару та зв'яжеться з "
+"вами для уточнення всіх деталей."
+
+#: templates/product/product_detail.html:110
+msgid "Политика доставки нашего магазина"
+msgstr "Політика доставки нашого магазину"
+
+#: templates/product/product_detail.html:111
+msgid ""
+"Отправляем заказы по всей Украине. Как только заказ будет передан "
+"перевозчику — вы получите номер экспресс-накладной по SMS или сообщением в "
+"Viber. По прибытии товаров в отделение, вы получите SMS или сообщение в "
+"Viber."
+msgstr ""
+"Відправляємо замовлення по всій Україні. Як тільки замовлення буде "
+"переданоперевізнику - ви отримаєте номер експрес-накладної за SMS або "
+"повідомленням в Viber. Після прибуття товарів у відділення, ви отримаєте SMS "
+"або повідомлення в Viber."
+
+#: templates/product/product_detail.html:130
+msgid "Добавить комментарий"
+msgstr "Додати коментар"
+
+#: templates/product/product_detail.html:144
+msgid "Сообщение"
+msgstr "Повідомлення"
+
+#: templates/product/product_detail.html:148
+msgid "Опубликовать"
+msgstr "Опублікувати"
+
+#: templates/product/product_detail.html:159
+msgid "Комментариев"
+msgstr "Коментарів"
+
+#: templates/product/product_detail.html:169
+msgid "Ответить"
+msgstr "Відповісти"
+
+#: templates/product/product_search.html:4
+msgid "Поиск товара"
+msgstr "Пошук товару"
+
+#: templates/product/product_search.html:13
+msgid "Результат поиска"
+msgstr "Результат пошуку"

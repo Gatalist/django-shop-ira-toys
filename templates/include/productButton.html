@@ -1,0 +1,26 @@
+{% load i18n %}
+<!-- Product Button add basket -->
+<div class="quantity-with_btn">
+    <form class="product-add" action="{% url 'basket_adding' %}">
+    {% csrf_token %}
+        <div class="row">
+            <div class="col">
+                <div class="quantity">
+                    <div class="cart-plus-minus">
+                        <input class="cart-plus-minus-box form-control" value="1" type="number" name="number" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <div class="dec qtybutton">-</div>
+                        <div class="inc qtybutton">+</div>
+                        <div class="dec qtybutton"><i class="fa fa-minus"></i></div>
+                        <div class="inc qtybutton"><i class="fa fa-plus"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn product-cart button-icon flosun-button dark-btn w-100" 
+                    data-id="{{product.id}}"
+                    data-img="{{product.poster.url}}">{% trans "В корзину" %}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- Product Button add basket end -->

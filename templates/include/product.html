@@ -1,0 +1,69 @@
+{% load i18n %}
+
+{% if product_list.count == 0 %}
+    <div style="min-height: 200px; margin-top: 120px">
+        <h3 class="text-center">{% trans "Нет товаров" %}</h3>
+    </div> 
+{% else %}
+    <!-- Shop Wrapper Start -->
+    <div class="row shop_wrapper grid_list">
+        {% for product in product_list %}
+            <div class="col-12 col-custom product-area product-search">
+                <div class="product-item" style="min-height: 200px;">
+                    <div class="single-product position-relative mr-0 ml-0">
+                        <div class="product-image">
+                            <a class="d-block" href="{{product.get_absolute_url_my}}">
+                                <img src="{{ product.poster.url }}" class="product-image-1 w-100" alt="{{ product.title }}">      
+                            </a>
+                            {% if product.status %}
+                                <span class="onsale">{{ product.status }}</span>
+                            {% endif %}
+                            <div class="add-action d-flex flex-column position-absolute">
+                                <a href="{{product.get_absolute_url_my}}" title="Подробнее"><i class="lnr lnr-eye" data-placement="left" ></i></a>
+                            </div>
+                        </div>
+                        <div class="product-content"> 
+                            <div class="product-title">
+                                <h4 class="title-2"> <a href="{{product.get_absolute_url_my}}">{{ product.title}}</a></h4>
+                            </div>                             
+                            <div class="price-box">
+                                <!-- price -->
+                                {% include "include/price.html" %} 
+                            </div>
+                            <button href="{{product.get_absolute_url_my}}" class="btn product-cart">{% trans "Подробнее" %}</button>
+                        </div>
+                        <div class="product-content-listview" style="margin-bottom: -60px">
+                            <div class="product-title">
+                                <h4 class="title-2"> <a href="{{product.get_absolute_url_my}}">{{ product.title }}</a></h4>
+                            </div>
+                            <br>
+                            <div class="d-flex bd-highlight" style="margin-bottom:10px;">
+                                <div class="flex-grow-1 bd-highlight">
+                                    <div class="price-box mb-2">
+                                        <!-- price -->{% include "include/price.html" %}
+                                    </div>
+                                </div>
+                                <div class="bd-highlight">
+                                    <h4 class="section-title-2"><span class="badge bg-danger">ID: {{ product.id }}</span></h4>
+                                </div>
+                            </div>
+                            {% include "include/availability.html" %}
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- Shop Wrapper End -->
+    <!-- Bottom Toolbar Start -->
+    <div class="row">
+        <div class="col-sm-12 col-custom">
+            <div class="toolbar-bottom">
+                {% include "include/pagination.html" %}
+                <p class="desc-content text-center text-sm-right mb-0">{{ page_obj.end_index }} / {{ page_obj.paginator.count }} {% trans "результатов" %}</p>
+            </div>
+        </div>
+    </div>
+    <!-- Bottom Toolbar End -->
+{% endif %}

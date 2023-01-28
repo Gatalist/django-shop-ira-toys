@@ -1,0 +1,41 @@
+{% extends 'product/base.html' %}
+{% load static i18n %}
+
+{% block title %} {{ news.title }} {% endblock title %}
+
+{% block content %}
+<!-- Breadcrumb Image -->
+{% include "include/breadcrumbsImage.html" %}
+<!-- Breadcrumb Image End -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">{% trans 'Главная' %}</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'news' %}">{% trans 'Новости' %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ news.title }}</li>
+  </ol>
+</nav>
+<!-- News End Here -->
+<div class="blog-area-wrapper" style="padding-top: 50px; padding-bottom: 50px">
+    <h2 class="section-title-2 text-center">{{ news.title }}</h2>
+    <div class="blog-main-area" style="margin-top: 20px">
+        <div class="container container-default custom-area">
+            <div class="row">
+                <div class="col-12 col-md-4"><img src="{{ news.poster.url }}" class="img-rounded" alt="..."></div>
+                <div class="col-12 col-md-8">
+                    <div class="blog-post-details">
+                        <section class="blog-post-wrapper product-summery">
+                            <div class="section-content section-title">                                
+                                <blockquote class="blockquote mb-4">
+                                    <p>{{ news.description | safe }}</p>
+                                </blockquote>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- News End Here -->
+{% endblock content %}

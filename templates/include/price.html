@@ -1,0 +1,11 @@
+<h3 class="card-title pricing-card-title text-success">
+    <b>
+        {% if request.session.valuta == 'USD' %}
+            {{product.retail_usd}}
+        {% elif request.session.valuta == 'ГРН' %}
+            {{product.retail_uah}}
+        {% endif %}
+        {{request.session.valuta}}
+    </b>
+</h3>
+<span class="old-price"><del></del></span>

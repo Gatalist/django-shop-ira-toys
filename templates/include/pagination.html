@@ -1,0 +1,27 @@
+<div class="pagination">
+	<ul>
+		{% if page_obj.has_previous %}
+			{% if page_obj.number|add:-3 == 1 %}
+				<li><a href="?{{q}}page={{ 1 }}">{{ 1 }}</a></li>
+			{% elif page_obj.number|add:-2 > 2 %}
+				<li><a href="?{{q}}page={{ 1 }}">{{ 1 }}</a></li>
+				<li><span>...</span></li>
+			{% endif %}
+		{% endif %}
+		{% for p in paginator.page_range %}
+			{% if page_obj.number == p %}
+				<li class="current">{{ p }}</li>
+			{% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+				<li><a href="?{{q}}page={{ p }}">{{ p }}</a></li>
+			{% endif %}
+		{% endfor %}
+		{% if page_obj.has_next %}
+			{% if page_obj.number|add:3 < paginator.num_pages %}
+				<li><span>...</span></li>
+				<li><a href="?{{q}}page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a></li>
+			{% elif page_obj.number|add:2 < paginator.num_pages %}
+				<li><a href="?{{q}}page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a></li>
+			{% endif %}
+		{% endif %}
+	</ul>
+</div>

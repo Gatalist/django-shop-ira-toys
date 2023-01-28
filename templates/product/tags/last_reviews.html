@@ -1,0 +1,14 @@
+{% load static %}
+{% for review in last_reviews %}
+    <!--Single Testimonial Start-->
+    <div class="single-item swiper-slide">
+        <div class="single-testimonial text-center">
+            <div class="testimonial-img"><img src="{% static 'images/review/baby.png' %}" style="width: 80px; height: 80px"></div>
+            <div class="testimonial-content">
+                <p>{{ review.text }}</p>
+                <div class="testimonial-author"><h6>{{ review.name }} <span>{{ review.dateAdd }} </span></h6></div>
+            </div>
+        </div>
+    </div>
+    <!--Single Testimonial End-->
+{% endfor %}

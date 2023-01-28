@@ -1,0 +1,47 @@
+{% load i18n static %}
+<!--Footer Area Start-->
+<footer class="footer-area">
+	<div class="footer-widget-area">
+		<div class="container container-default custom-area">
+			<div class="row">		
+				<div class="col-12 col-custom">
+					<div class="single-footer-widget">
+						<h2 class="widget-title">{% trans "Контакты" %}</h2>
+						<div class="row mt-3">
+							<div class="col-md-4" style="margin-bottom: 20px">
+								<h6 class="fw-bold">
+									<a href="https://invite.viber.com/?g2=AQBSsBmtorxkCUlk0Z20C0J5+poXKX6CVMVvk2nsN5wmDXV7lf8gOVxuHjFwIud+" style="color: white;">
+										<img src="{% static 'images/viber.svg' %}" style="width: 20px; border-radius: 20px; margin-right: 5px"> {% trans "Viber группа" %}
+									</a>
+								</h6>          
+							</div>							
+							<div class="col-md-4" style="margin-bottom: 20px">   
+								<h6 class="fw-bold">
+									<a href="tel:380974903098" style="color: white;"><i class="fa fa-phone"></i> +38(097) 490 30-98</a>
+								</h6>
+							</div>					
+							<div class="col-md-4" style="margin-bottom: 20px">
+								<h6 class="fw-bold">
+									<a href="mailto:ira.toys.by7km@gmail.com" style="color: white;"><i class="fa fa-envelope"></i> ira.toys.by7km@gmail.com</a>
+								</h6>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-copyright-area">
+		<div class="container custom-area">
+			<div class="row">
+				<div class="col-12 text-center col-custom">
+					<div class="copyright-content">
+						{% now "Y" as years_str %}
+						<p>Copyright © {{ years_str }} | {% blocktranslate %}Все права защищены.{% endblocktranslate %}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!--Footer Area End-->

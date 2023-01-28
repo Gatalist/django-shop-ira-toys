@@ -1,0 +1,120 @@
+{% extends 'product/base.html' %}
+{% load static i18n %}
+
+{% block title %} {% trans "Оформление заказа" %} {% endblock title %}
+
+{% block content %}
+<!-- Breadcrumb Image -->
+{% include "include/breadcrumbsImage.html" %}
+<!-- Breadcrumb Image End -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">{% trans "Главная" %}</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'basket_detail' %}">{% trans "Корзина" %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{% trans "Оформление заказа" %}</li>
+  </ol>
+</nav>
+{% include "include/info_order_sum.html" %}
+<!-- Checkout Area Start Here -->
+<div class="checkout-area mt-no-text" style="margin-top: 50px; margin-bottom: 50px">
+    <div class="container custom-container">
+        <div class="row">  
+            <div class="col-lg-6 col-12 col-custom">          
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="checkbox-form">
+                        <h3>{% trans "Форма заказа" %}</h3>
+                        <div class="row">   
+                            <div class="col-md-6 col-custom" style="margin-bottom: 20px">
+                                <label>{% trans "Имя" %}</label>
+                                <input class="form-control" type="text" name="{{form.firstname.html_name}}" value="{{request.POST.firstname}}" id="firstname">
+                                <div class="valid-feedback">{% trans "Принято!" %}</div>
+                                <div class="invalid-feedback">{% trans "Введите ваше Имя!" %}</div>
+                            </div>
+                            <div class="col-md-6 col-custom" style="margin-bottom: 20px">
+                                <label>{% trans "Фамилия" %}</label>
+                                <input class="form-control" type="text" name="{{form.lastname.html_name}}" value="{{request.POST.lastname}}" id="lastname">      
+                                <div class="valid-feedback">{% trans "Принято!" %}</div>
+                                <div class="invalid-feedback">{% trans "Введите вашу Фамилию!" %}</div>
+                            </div>
+                            <div class="col-md-6 col-custom" style="margin-bottom: 20px">
+                                <label>{% trans "Город" %}</label>
+                                <input class="form-control" type="text" name="{{form.city.html_name}}" value="{{request.POST.city}}" id="city">
+                                <div class="valid-feedback">{% trans "Принято!" %}</div>
+                                <div class="invalid-feedback">{% trans "Введите ваш Город!" %}</div>
+                            </div>
+                            <div class="col-md-6 col-custom" style="margin-bottom: 20px">
+                                <label>{% trans "Телефон" %}</label>
+                                <input class="form-control" type="text" name="{{form.phone.html_name}}" id="phone">
+                                <div class="valid-feedback">{% trans "Принято!" %}</div>
+                                <div class="invalid-feedback">{% trans "Введите ваш Телефон!" %}</div>
+                            </div>
+                            <div class="col-md-12 col-custom" style="margin-bottom: 20px" >
+                                <label>Email</label>
+                                <input class="form-control" type="text" name="{{form.email.html_name}}" value="{{request.POST.email}}" id="email">
+                                <div class="valid-feedback">{% trans "Принято!" %}</div>
+                                <div class="invalid-feedback">{% trans "Введите ваш Email!" %}</div>
+                            </div>                            
+                        </div>  
+                        <div class="order-button-payment">
+                            <button class="btn flosun-button secondary-btn black-color rounded-0 w-100" disabled="disabled">{% trans "Оформить заказ" %}</button>
+                        </div>
+                    </div>
+                </form>        
+            </div>
+            <div class="col-lg-6 col-12 col-custom">
+                <div class="your-order">
+                    <h3>{% trans "Ваш заказ" %}</h3>
+                    <div class="your-order-table table-responsive">
+                        <table class="table">                      
+                            <tbody>
+                                {% for product in products_in_basket %}
+                                    <tr class="cart_item">
+                                        <td class="cart-product-name">{{product.product}}
+                                            <strong class="product-quantity"> × {{product.nmb}}</strong>
+                                        </td>
+                                        <td class="cart-product-total text-center">
+                                            {% if request.session.valuta == 'USD' %}
+                                                <span class="amount">{{product.total_price_usd}} $</span>
+                                            {% elif request.session.valuta == 'EUR' %}
+                                                <span class="amount">{{product.total_price_eur}} €</span>
+                                            {% elif request.session.valuta == 'ГРН' %}
+                                                <span class="amount">{{product.total_price_uah}} грн</span>
+                                            {% else %}
+                                                <span class="amount">{{product.total_price_usd}} $</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr class="order-total">
+                                    <th>{% trans "Сумма заказа" %}</th>
+                                    <td class="text-center">
+                                        <strong>
+                                            {% if request.session.valuta == 'USD' %}
+                                                <span class="total">{{all_sum}}&nbsp$</span>
+                                            {% elif request.session.valuta == 'EUR' %}
+                                                <span class="total">{{all_sum}}&nbsp€</span>
+                                            {% elif request.session.valuta == 'ГРН' %}
+                                                <span class="total">{{all_sum}}&nbspгрн</span>
+                                            {% else %}
+                                                <span class="total">{{all_sum}}&nbsp$</span>
+                                            {% endif %}
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Checkout Area End Here -->
+{% endblock content %}
+{% block script %}
+<!-- form validation JS -->
+<script src="{% static 'js/validation.js' %}"></script>
+{% endblock script %}

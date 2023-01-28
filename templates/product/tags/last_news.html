@@ -1,0 +1,19 @@
+{% load i18n %}
+{% for news in last_newses %}
+    <!--Item news Start-->
+    <div class="col-12 col-md-4 col-lg-4 col-custom mb-30">
+        <div class="blog-lst">
+            <div class="single-blog">
+                <div class="blog-image"><a class="d-block" href="{{ news.get_absolute_url }}"><img src="{{ news.poster.url }}" class="w-100"></a></div>
+                <div class="blog-content">
+                    <div class="blog-text">
+                        <h4><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></h4>
+                        <div class="blog-post-info"><span>{{ news.dateAdd }}</span></div>
+                        <a href="{{ news.get_absolute_url }}" class="readmore">{% trans "Подробнее" %} <i class="fa fa-long-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Item news End-->
+{% endfor %}

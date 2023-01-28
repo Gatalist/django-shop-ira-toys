@@ -1,0 +1,61 @@
+{% extends 'product/base.html' %}
+{% load i18n static contact_tags %}
+
+{% block title %} {% trans "О нас" %} {% endblock title %}
+
+{% block content %}
+<!-- Breadcrumb Image -->
+{% include "include/breadcrumbsImage.html" %}
+<!-- Breadcrumb Image End -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">{% trans "Главная" %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{% trans "О нас" %}</li>
+  </ol>
+</nav>
+<!-- History Area Start Here -->
+{% include "include/history.html" %}
+<!-- Feature History Area End Here -->
+<!-- Contact Us Area Start Here -->
+<div class="contact-us-area mt-no-text">
+    <div class="container custom-area">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-custom">
+                <div class="contact-info-item">
+                    <div class="con-info-icon"><i class="lnr lnr-map-marker"></i></div>
+                    <div class="con-info-txt">
+                        <h4>{% trans "Наше расположение" %}</h4>
+                        <p>{% trans "Украина / г. Одесса / 7 км" %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-custom">
+                <div class="contact-info-item">
+                    <div class="con-info-icon"><i class="lnr lnr-smartphone"></i></div>
+                    <div class="con-info-txt">
+                        <h4>{% trans "Контакты" %}</h4>
+                        <a href="tel:380974903098"><i class="fa fa-phone"></i> +38(097) 490 30-98</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-custom text-align-center">
+                <div class="contact-info-item">
+                    <div class="con-info-icon"><i class="lnr lnr-envelope"></i></div>
+                    <div class="con-info-txt">
+                        <h4>{% trans "Поддержка" %}</h4>
+						<a href="mailto:ira.toys.by7km@gmail.com"><i class="fa fa-envelope"></i> ira.toys.by7km@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact Us Area End Here -->
+<!-- Newsletter Area Start Here -->
+{% include "include/contact_email.html" %}
+<!-- Newsletter Area End Here -->
+{% endblock content %}
+{% block script %}
+<!-- form contact validation JS -->
+<script src="{% static 'js/contact.js' %}"></script>
+{% endblock script %}

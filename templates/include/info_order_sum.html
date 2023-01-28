@@ -1,0 +1,16 @@
+{% load i18n %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{% blocktranslate %}Обратите внимание!{% endblocktranslate %}</strong> {% blocktranslate %}Мы не принимаем заказы меньше{% endblocktranslate %}
+      {% if request.session.valuta == 'USD' %}
+          <strong> 100 $</strong>
+      {% elif request.session.valuta == 'EUR' %}
+          <strong> 100 €</strong>
+      {% elif request.session.valuta == 'ГРН' %}
+          <strong> 3000 грн</strong>
+      {% else %}
+          <strong> 100 $</strong>
+      {% endif %}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>

@@ -1,0 +1,145 @@
+{% load i18n static %}
+
+<!-- basket Start -->
+<div class="col-lg-3 col-md-7 col-8 col-custom">
+	<div class="header-right-area main-nav">
+		<ul class="nav">
+			<li class="sidemenu-wrap">
+				<a href="#"><i class="fa fa-search"></i> </a>
+				<ul class="dropdown-sidemenu dropdown-hover-2 dropdown-search">
+					<li>
+						<form action="{% url 'search' %}" method="get">
+							<input type="search" name="q" required="" placeholder="Поиск товара...">
+							<button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+						</form>
+					</li>
+				</ul>
+			</li>
+			<li class="sidemenu-wrap">
+				<select class="form-controls" style="font-weight: bold; background: transparent; border: none" id='valuta'>
+					{% if request.session.valuta == 'USD' %}
+						<option selected value="USD">USD</option>
+						<option value="ГРН">ГРН</option>
+					{% elif request.session.valuta == 'ГРН' %}
+						<option selected value="ГРН">ГРН</option>
+						<option value="USD">USD</option>
+					{% endif %}
+				</select>
+			</li>
+			<li class="minicart-wrap">
+				<a href="{% url 'basket_detail' %}" class="minicart-btn toolbar-btn">
+					<i class="fa fa-shopping-cart"></i>
+					<span class="cart-item_count">{{products_total_nmb}}</span>
+				</a>
+				{% if products_in_basket.count < 1 %}
+					<div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2" id="shopping" style="height: 60px; background: #f8f8f8;">
+				{% elif products_in_basket.count == 1 %}
+					<div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2" id="shopping" style="height: 200px; background: #f8f8f8;">
+				{% elif products_in_basket.count == 2 %}
+					<div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2" id="shopping" style="height: 320px; background: #f8f8f8;">
+				{% else %}
+					<div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2" id="shopping" style="overflow: scroll; height: 350px; background: #f8f8f8;">				
+				{% endif %}					
+					<div id="basket-product">
+						{% for product in products_in_basket %}
+							<!-- cart-item start-->
+							<div class="full-card-remove"> 
+								<form class="product-card-removes" action="{% url 'basket_adding' %}">
+    								{% csrf_token %}
+									<div class="single-cart-item">
+										<div class="container">
+											<div class="row">
+												<div class="col-3" >
+													<a href="{{product.get_absolute_url_my}}">
+														<img class="img" style="display: block" src="{{product.product.poster.url}}" alt="">
+													</a>										
+												</div>
+												<div class="col-9" style="top: -50px">
+													<a href="{{product.get_absolute_url_my}}" style="display: block">
+														<h5 class="title">{{product.product}}</h5>
+													</a>																				
+													<span class="number">{{product.nmb}} </span>
+													<span> × </span>
+													{% if request.session.valuta == 'USD' %}
+														<span class="summ">{{product.product.retail_usd}}</span>
+													{% elif request.session.valuta == 'ГРН' %}
+														<span class="summ">{{product.product.retail_uah}}</span>
+													{% endif %}
+													<span> = </span>
+													{% if request.session.valuta == 'USD' %}
+														<span class="cart-price" style="color: #d63384;"><b>{{product.total_price_usd}}</b></span>
+													{% elif request.session.valuta == 'ГРН' %}
+														<span class="cart-price" style="color: #d63384;"><b>{{product.total_price_uah}}</b></span>
+													{% endif %}
+														<span style="color: #d63384;"><b> {{request.session.valuta}}</b></span>
+													<button class="pro-remove" data-id="{{product.id}}"> 
+														<i class="lnr lnr-trash"></i>
+													</button>								
+												</div>
+											</div>
+										</div>
+									</div>
+									<hr style='margin:0; margin-bottom: 20px; border-bottom: 1px solid;'>
+								</form>
+							</div>
+							<!-- cart-item end-->
+						{% endfor %}
+					</div>
+					<template id='castom'>
+						<!-- cart-item start-->
+						<div class="full-card-remove"> 
+							<form class="product-card-removes" action="{% url 'basket_adding' %}">
+								{% csrf_token %}
+								<div class="single-cart-item">
+									<div class="container">
+										<div class="row">
+											<div class="col-3" >
+												<img class="img" style="display: block" src="" alt="">
+											</div>
+											<div class="col-9" style="top: -50px">
+												<a href="" style="display: block">
+													<h5 class="title"><a href=""></a></h5>
+												</a>								
+												<span class="number"></span>
+												<span> × </span>
+												<span class="summ"></span>
+												<span> = </span>
+												<span class="cart-price" style="color: #d63384;"><b></b></span>
+												<span style="color: #d63384;"><b> {{request.session.valuta}}</b></span>
+												<button class="pro-remove" data-id="0">
+													<i class="lnr lnr-trash"></i>
+												</button>											
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr style='margin:0; margin-bottom: 20px; border-bottom: 1px solid;'>
+							</form>
+						</div>
+						<!-- cart-item end-->
+					</template>
+					<div class="basket-bottom d-flex justify-content-between">
+						<h5><b>{% trans "Сумма заказа :" %}</b></h5>
+						<h3 class="badge bg-success" style="font-size: 14px">
+							<span id="all_sum">{{all_sum}}</span>
+							<span> {{request.session.valuta}}</span>
+						</h3>
+					</div>
+				</div>
+			</li>
+			<li class="mobile-menu-btn d-lg-none">
+				<a class="off-canvas-btn" href="#">
+					<i class="fa fa-bars"></i>
+				</a>
+			</li>
+			<li class="sidemenu-wrap" id="language-pc">
+				{% if LANGUAGE_CODE == 'ru' %}
+					<a href="{% url 'set-language' 'uk' %}" style=" border-radius: 10px; border:2px solid #dae0e5; color:white; padding: 4px 7px; background-image:url({% static 'images/flags/ua.svg' %}); background-repeat: no-repeat;"><b>uk</b></a>
+				{% else %}
+					<a href="{% url 'set-language' 'ru' %}" style=" border-radius: 10px; border:2px solid #dae0e5; color:white; padding: 4px 7px; background-image:url({% static 'images/flags/ru.svg' %}); background-repeat: no-repeat;"><b>ru</b></a>
+				{% endif %}
+			</ul>
+		</ul>
+	</div>
+</div>
+<!-- basket End -->

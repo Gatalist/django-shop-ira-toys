@@ -1,0 +1,64 @@
+{% extends 'product/base.html' %}
+{% load static i18n %}
+
+{% block title %} {% trans 'Новости' %} {% endblock title %}
+
+{% block content %}
+<!-- Breadcrumb Image -->
+{% include "include/breadcrumbsImage.html" %}
+<!-- Breadcrumb Image End -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">{% trans 'Главная' %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{% trans 'Новости' %}</li>
+  </ol>
+</nav>
+<!-- Blog Main Area Start Here -->
+<div class="blog-main-area" style="margin-top: 30px; margin-bottom: 30px">
+    <div class="container ">
+        <div class="row flex-row-reverse">
+            {% if news_list.count == 0 %}
+                <div class="row">
+                    <div style="min-height: 200px; margin-top: 120px">
+                        <h3 class="text-center">{% trans "Нет новостей" %}</h3>
+                    </div> 
+                </div>
+            {% else %}
+                <div class="row">
+                    {% for news_item in news_list %}
+                        <div class="col-12 col-md-4">
+                            <div class="blog-lst">
+                                <div class="single-blog">
+                                    <div class="blog-image">
+                                        <a class="d-block" href="{{ news_item.get_absolute_url }}"><img src="{{ news_item.poster.url }}" alt="Blog Image" class="w-100"></a>
+                                    </div>
+                                    <div class="blog-content">
+                                        <div class="blog-text">
+                                            <h4><a href="{{ news_item.get_absolute_url }}">{{ news_item.title }}</a></h4>
+                                            <div class="blog-post-info"><span>{{ news_item.dateAdd }}</span></div>
+                                            <a href="{{ news_item.get_absolute_url }}" class="readmore">{% trans 'Подробнее' %} <i class="fa fa-long-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <!-- Bottom Toolbar Start -->
+                    <div class="row">
+                        <div class="col-sm-12 col-custom" style='padding-top: 50px'>
+                            <div class="toolbar-bottom">
+                                {% include "include/pagination.html" %}
+                                <p class="desc-content text-center text-sm-right mb-0">{{ page_obj.end_index }} / {{ page_obj.paginator.count }} - {% trans "новости" %}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bottom Toolbar End -->
+                </div>
+            {% endif %}
+            
+        </div>
+    </div>
+</div>
+<!-- Blog Main Area End Here -->
+{% endblock content %}
