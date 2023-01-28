@@ -1,5 +1,6 @@
-/media
+.gitignore
 /venv
+/media
 /articles/migrations
 /articles/__pycache__
 /config/__pycache__
