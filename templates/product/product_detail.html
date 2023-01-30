@@ -11,8 +11,8 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{% url 'index' %}">{% trans 'Главная' %}</a></li>
     <li class="breadcrumb-item"><a href="{% url 'category_list' %}">{% trans 'Категории' %}</a></li>
-    <li class="breadcrumb-item"><a href="{{category.get_absolute_url}}">{{category}}</a></li>
-    <li class="breadcrumb-item"><a href="{{category.get_absolute_url}}{{subcategory.slug}}">{{subcategory}}</a></li>
+    <li class="breadcrumb-item"><a href="{{category.get_absolute_url}}">{{category.name}}</a></li>
+    <li class="breadcrumb-item"><a href="{{subcategory.get_absolute_url}}">{{subcategory.name}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{product.title}}</li>
   </ol>
 </nav>

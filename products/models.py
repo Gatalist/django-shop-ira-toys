@@ -10,6 +10,8 @@ class Category(models.Model):
     name = models.CharField('Категория', max_length=150)
     slug = models.SlugField(max_length=250, unique=True, db_index=True, verbose_name="url")
     poster = models.ImageField("Изображение", upload_to='category/')
+    # alt = models.CharField('alt', max_length=150, null=True, blank=True)
+    # updated = models.DateField(auto_now=True, verbose_name="Обновлен")
 
     def __str__(self):
         return self.name
@@ -28,6 +30,8 @@ class SubCategory(models.Model):
     slug = models.SlugField(max_length=250, unique=True, db_index=True, verbose_name="url")
     category = models.ForeignKey(Category, verbose_name = "Категория", blank=True, null=True, on_delete=models.SET_NULL)
     poster = models.ImageField("Изображение", upload_to='sub-category/')
+    # alt = models.CharField('alt', max_length=150, null=True, blank=True)
+    # updated = models.DateField(auto_now=True, verbose_name="Обновлен")
 
     def __str__(self):
         return self.name
@@ -35,13 +39,12 @@ class SubCategory(models.Model):
     class Meta:
         verbose_name = "Под Категория"
         verbose_name_plural = "Под Категории"
+    
+    # def get_absolute_url(self):
+    #     return reverse("product_list", kwargs={"category": self.category.category.slug, "subcategory": self.category.slug})
 
     def get_absolute_url(self):
-        return f"{self.slug}"
-    
-    def get_absolute_url_my(self):
-        return reverse("product_list", kwargs={"category": self.category.category.slug, "subcategory": self.category.slug})
-
+        return reverse("product_list", kwargs={"category": self.category.slug, "subcategory": self.slug})
 
 class Status(models.Model):
     name = models.CharField("Имя", max_length=24, blank=True, null=True, default=None)
@@ -81,6 +84,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=250, unique=True, db_index=True, verbose_name="url")
     category = models.ForeignKey(SubCategory, verbose_name = "Категория", null=True, blank=True, on_delete=models.SET_NULL)
     dateAdd = models.DateField("Добавлен", default=date.today)
+    # updated = models.DateField(auto_now=True, verbose_name="Обновлен")
     material = models.CharField("Материал", null=True, blank=True, max_length=100)
     country = models.CharField("Страна", null=True, blank=True, max_length=150)
     packaging = models.CharField("Упаковка", null=True, blank=True, max_length=150)
@@ -88,11 +92,23 @@ class Product(models.Model):
     retail = models.FloatField("Цена", null=True, help_text="")
     description = RichTextUploadingField("Описание", max_length=5000)
     poster = models.ImageField("Изображение", upload_to='products/')
+    # alt = models.CharField('alt', max_length=150, null=True, blank=True)
     
+    # noindex = models.BooleanField("noindex", default=False)
+    # nofollow = models.BooleanField("nofollow", default=False)
+    # canonical = models.CharField("Canonical", max_length=1000, null=True, blank=True)
+    # meta_title = models.TextField("title", max_length=1000, null=True, blank=True)
+    # meta_keywords = models.TextField("keywords", max_length=1000, null=True, blank=True)
+    # seo_text = models.TextField("SEO text", max_length=10000, null=True, blank=True)
+    # meta_description = models.TextField("description", max_length=1000, null=True, blank=True)
+    # meta_og_title = models.TextField("og:title", max_length=1000, null=True, blank=True)
+    # meta_og_description = models.TextField("og:description", max_length=1000, null=True, blank=True)
+
+
     def __str__(self):
         return self.title
 
-    def get_absolute_url_my(self):
+    def get_absolute_url(self):
         return reverse("product_detail", kwargs={"category": self.category.category.slug, "subcategory": self.category.slug, "slug": self.slug})
 
     def get_review(self):
@@ -119,13 +135,19 @@ class ProductImage(models.Model):
     title = models.CharField("Заголовок", max_length=150)
     image = models.ImageField("Изображение", upload_to='products_image/')
     product = models.ForeignKey(Product, verbose_name = "Продукт", on_delete=models.CASCADE)
-    
+    # alt = models.CharField('alt', max_length=150, default='image')
+
     def __str__(self):
         return self.title
 
     class Meta:
         verbose_name =  "Изображение товара"
         verbose_name_plural =  "Изображение товаров"
+
+    # def save(self, *args, **kwargs):
+    #     if not self.alt:
+    #         self.alt = "Image"
+    #     super(ProductImage, self).save(*args, **kwargs)
 
 
 class Reviews(models.Model):
@@ -155,8 +177,10 @@ class News(models.Model):
     title = models.CharField("Название", max_length=250)
     slug = models.SlugField(max_length=250, unique=True, db_index=True, verbose_name="url")
     dateAdd = models.DateField("Дата добавления", default=date.today)
+    # updated = models.DateField(auto_now=True, verbose_name="Обновлен")
     description = RichTextUploadingField("Текст публикации")
     poster = models.ImageField("Изображение", upload_to='news/')
+    # alt = models.CharField('alt', max_length=150, null=True, blank=True)
 
     def __str__(self):
         return f'{self.title}'
@@ -181,7 +205,10 @@ class ImageHome(models.Model):
     slug = models.CharField("url", null=True, blank=True, max_length=250)
     btn_name = models.CharField("Текст на кнопке", null=True, blank=True, default='Подробнее', max_length=50)
     image = models.ImageField("Изображение", upload_to="image_home/")
-    
+    # alt = models.CharField('alt', max_length=150, null=True, blank=True)
+    # updated = models.DateField(auto_now=True, verbose_name="Обновлен")
+    # dateAdd = models.DateField("Дата добавления", default=date.today)
+
     def __str__(self):
         return f'{self.product}'
 

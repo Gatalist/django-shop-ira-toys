@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-from django.utils.translation import gettext_lazy as _
+# from django.utils.translation import gettext_lazy as _
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -9,7 +9,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Application definition
 INSTALLED_APPS = [
     'modeltranslation',
-    'rosetta',
+    # 'rosetta',
+    # 'tabbed_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -17,7 +18,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 'django.contrib.sites',
-    # 'django.contrib.flatpages',    
+    # 'django.contrib.flatpages',
+    # 'debug_toolbar',   
     'ckeditor',
     'ckeditor_uploader',
     'products.apps.ProductsConfig',
@@ -25,6 +27,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'articles.apps.ArticlesConfig',
     'currency.apps.CurrencyConfig',
+    # 'site_management',
 ]
 
 MIDDLEWARE = [
@@ -39,6 +42,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'django.core.mail.backends.smtp.EmailBackend',
     # 'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    # "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'django_product.urls'
@@ -133,6 +137,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
+# TABBED_ADMIN_USE_JQUERY_UI = True
 
 from .ckeditor_settings import *
  
@@ -152,7 +157,7 @@ product_count_index = 10 # количество новинок на слайде
 news_count_index = 3 # количество новостей - главная
 reviews_count_index = 5 # количество отзывов на слайдере - главная
 
-product_in_page = 16 # количество продуктов на странице
+product_in_page = 6 # количество продуктов на странице
 
 new_product_data = 14 # указываем количество дней за сколько отображать новинки
 id_product_new = 2 # id статуса новинок

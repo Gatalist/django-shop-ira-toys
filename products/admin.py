@@ -1,14 +1,19 @@
 from django import forms
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from .models import Category, Product, Reviews, ProductImage, ImageHome, News, Status, SubCategory, Availability
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from modeltranslation.admin import TranslationAdmin
+# from tabbed_admin import TabbedModelAdmin
+# from django.db import models
+# from django.forms import TextInput, Textarea
+from .models import Category, Product, Reviews, ProductImage, ImageHome, News, Status, SubCategory, Availability
 
 
 class ProductAdminForm(forms.ModelForm):
     description_ru = forms.CharField(label='Описание [ru]', widget=CKEditorUploadingWidget())
     description_uk = forms.CharField(label='Описание [uk]', widget=CKEditorUploadingWidget())
+    # description_ru = forms.Textarea()
+    # description_uk = forms.Textarea()
 
     class Meta:
         model = Product
@@ -24,7 +29,7 @@ class CategoryAdmin(TranslationAdmin):
     def get_image(self, obj):
         return mark_safe(f'<img src="{obj.poster.url}" width="50" height="auto">')
 
-    get_image.short_description = "Миниатюра"
+    get_image.short_description = "Изображение"
     readonly_fields = ("get_image", )
 
 

@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.base import View
+from django.utils import translation
 from django_product.settings import product_in_page, product_count_index
 from .models import Product, ImageHome, News, Category, SubCategory
 from .forms import ReviewForm
 from .service import range_date
-from django.utils import translation
+from .mixin import MixinMetaTags
 
 
 class CategoryView(ListView):
@@ -34,7 +35,7 @@ class ProductView(ListView):
     context_object_name = 'product_list'
 
     def get_queryset(self):
-        product = Product.objects.filter(draft=True, category__slug=self.kwargs['subcategory'])
+        product = Product.objects.filter(draft=True, category__slug=self.kwargs['subcategory']).select_related('category', 'availability', 'status')
         return product
 
     def get_context_data(self, **kwargs):
@@ -66,7 +67,7 @@ class ProductNewsView(ListView):
 
     def get_queryset(self):
         new_date = range_date()
-        return Product.objects.filter(draft=True, dateAdd__range=[new_date[0], new_date[1]])
+        return Product.objects.filter(draft=True, dateAdd__range=[new_date[0], new_date[1]]).select_related('category', 'availability', 'status')
 
     def get_context_data(self, **kwargs):
         lang = translation.get_language()
@@ -87,7 +88,7 @@ class NewProductDay(ListView):
     context_object_name = 'product_list'
 
     def get_queryset(self):
-        product = Product.objects.filter(draft=True, dateAdd=self.kwargs['date'])
+        product = Product.objects.filter(draft=True, dateAdd=self.kwargs['date']).select_related('category', 'availability', 'status')
         return product
 
     def get_context_data(self, **kwargs):
@@ -112,15 +113,24 @@ class AddReview(View):
                 form.parent_id = int(request.POST.get("parent"))
             form.product = product
             form.save()
-        return redirect( f"/category/{product.category.category.slug}/{product.category.slug}/{product.slug}")
+        
+        return redirect(product)
 
 
-class IndexView(ListView):
+class IndexView(MixinMetaTags, ListView):
     """главная"""
-    def get(self, request):
-        imagehome_list = ImageHome.objects.filter(draft=True).order_by('-id')
-        product = Product.objects.filter(draft=True)[:product_count_index]
-        return render(request, "product/index.html", {"imagehome_list": imagehome_list, "last_products": product})
+    model = Product
+    template_name = "product/index.html"
+    context_object_name = 'last_products'
+
+    def get_queryset(self):
+        return Product.objects.filter(draft=True)[:product_count_index].select_related('category', 'availability', 'status')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context["meta_tags"] = self.meta_tags
+        context["imagehome_list"] = ImageHome.objects.filter(draft=True).order_by('-id').select_related('product', 'news', 'status')
+        return context
 
 
 class NewsView(ListView):

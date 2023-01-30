@@ -1,36 +1,59 @@
 <!DOCTYPE html>
-{% load static %}
-<html class="no-js" lang="ru">
+
+{% load static product_tag %}
+
+<html class="no-js">
   <head>
-      <title>{% block title %} {% endblock title %}</title>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
-      <meta http-equiv="cleartype" content="on">  
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <meta http-equiv="Cache-Control" content="no-cache">
-      <meta name="csrf-token" content="{{ csrf_token }}">
-      <link href="https://" rel="canonical">
-      <link href="https://" rel="alternate" hreflang="ru">
-      <meta name="keywords" content="игрушки оптом в одессе, игрушки оптом, игрушки оптом украина, детские игрушки оптом, детские игрушки оптом украина, игрушки, детские товары" />
-      <meta name="description" content="грушки оптом в Одессе с доставкой по Украине. Широкий ассортимент детских игрушек оптом и в розницу.">
-      <!-- Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-TRS08ENL0W"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-TRS08ENL0W');
-      </script>
-      <!-- Favicon -->
-      <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
-      <!-- CSS  ============================================ -->
-      <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.min.css' %}">      <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="{% static 'css/vendor/font.awesome.min.css' %}">   <!-- Font Awesome CSS -->
-      <link rel="stylesheet" href="{% static 'css/vendor/linearicons.min.css' %}">    <!-- Linear Icons CSS -->
-      <link rel="stylesheet" href="{% static 'css/plugins/swiper-bundle.min.css' %}"> <!-- Swiper CSS -->
-      <link rel="stylesheet" href="{% static 'css/plugins/animate.min.css' %}">       <!-- Animation CSS -->
-      <link rel="stylesheet" href="{% static 'css/style.css' %}">                     <!-- Main Style CSS -->
+    <meta charset="UTF-8">    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=0, minimum-scale=1, shrink-to-fit=no, viewport-fit=cover">
+    <meta http-equiv="cleartype" content="on">  
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache">
+
+    <meta name="og:type" property="og:type" content="website">
+    <link rel="canonical" href="https://ira-toys-by-7km.com/ru/">
+    <link rel="alternate" href="https://ira-toys-by-7km.com/ru/" hreflang="ru-UA">
+    <link rel="alternate" href="https://ira-toys-by-7km.com/" hreflang="uk-UA">
+    <meta name="og:site_name" property="og:site_name" content="Интернет-магазин Игрульки от Ирульки">
+    <meta property="og:site_name" content="Игрульки от Ирульки">
+
+    <meta property="og:locale:alternate" content="ru-UA">
+    <meta property="og:url" content="https://ira-toys-by-7km.com/">
+    <meta property="og:locale" content="ru-UA">
+
+    {% comment %}
+    {% block title %} 
+    {% endblock title %}
+    
+    {% block keywords %} 
+    {% endblock keywords %}
+
+    {% block description %} 
+    {% endblock description %}
+    
+    {% block og_title %} 
+    {% endblock og_title %}
+
+    {% block og_description %} 
+    {% endblock og_description %} 
+
+    
+    <!-- Google Analytics script -->
+    {% script_google_analytics as google_analytics %}
+    {{ google_analytics | safe }} -->
+    <!-- Google Analytics script -->
+    {% endcomment %}
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <!-- CSS  ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.min.css' %}">      <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/vendor/font.awesome.min.css' %}">   <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="{% static 'css/vendor/linearicons.min.css' %}">    <!-- Linear Icons CSS -->
+    <link rel="stylesheet" href="{% static 'css/plugins/swiper-bundle.min.css' %}"> <!-- Swiper CSS -->
+    <link rel="stylesheet" href="{% static 'css/plugins/animate.min.css' %}">       <!-- Animation CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">                     <!-- Main Style CSS -->
   </head>
   <body>
     <!--===== Pre-Loading area Start =====-->
@@ -54,8 +77,9 @@
     <script src="{% static 'js/plugins/swiper-bundle.min.js' %}"></script>   <!-- Swiper Slider JS -->
     <script src="{% static 'js/main.js' %}"></script>                        <!-- Main JS -->
     <script src="{% static 'js/ajax.js' %}"></script>                        <!-- Card Plus - Minus JS -->
+    
     {% block script %}
-      
     {% endblock script %}
+
   </body>
 </html>

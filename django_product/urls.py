@@ -4,7 +4,18 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from .views import set_language
-# from django.conf.urls import handler404, handler500
+# from django.contrib.sitemaps.views import sitemap
+# from .sitemaps import ProductSitemap, StaticSitemap, CategorySitemap, SubCategorySitemap, NewsSitemap
+# from .views import robots_txt
+
+
+# sitemaps = {
+#     'product': ProductSitemap,
+#     'category': CategorySitemap,
+#     'subcategory': SubCategorySitemap,
+#     'news': NewsSitemap,
+#     'static': StaticSitemap,
+# }
 
 
 urlpatterns = [
@@ -22,15 +33,21 @@ urlpatterns = [
     path("orders/", include("orders.urls")),
     path("currency/", include("currency.urls")),
     path("", include("products.urls")),
+    # path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
+    # path('robots.txt', robots_txt, name='robots'),
 
     prefix_default_language = False
 )
 
-handler404 = "django_product.views.error_404"
-handler500 = "django_product.views.error_500"
+handler404 = "django_product.views.handler404"
+handler500 = "django_product.views.handler500"
 
 
 if settings.DEBUG:
+    # import debug_toolbar
+    # urlpatterns = [
+    #     path('__debug__/', include(debug_toolbar.urls)),
+    #     ] + urlpatterns
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

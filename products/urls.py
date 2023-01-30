@@ -1,12 +1,13 @@
-# from django.views.decorators.cache import cache_page
 from django.urls import path
 from . import views
+# from django.views.decorators.cache import cache_page
 
 
 urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
     
     path("about-us/", views.AboutView.as_view(), name="about"),
+    # path("about-us/", cache_page(60 * 5)(views.AboutView.as_view()), name="about"),
     
     path("basket/", views.BasketDetailView.as_view(), name="basket_detail"),
     

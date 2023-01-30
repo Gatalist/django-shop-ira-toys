@@ -2,7 +2,9 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'skin': 'moono',
+        # 'skin': 'moono-lisa',
+        'skin': 'kama',
+        # 'skin': 'moono',
         # 'skin': 'office2013',
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']
@@ -17,9 +19,9 @@ CKEDITOR_CONFIGS = {
             {'name': 'editing', 
                         'items': ['Find', '-', 'Replace', '-', 'SelectAll']},
 
-            {'name': 'forms',
-                        'items': ['Checkbox', '-', 'Radio', '-', 'TextField', '-', 'Textarea', '-', 'Select', '-', 'Button',]},
-            '/',
+            # {'name': 'forms',
+            #             'items': ['Checkbox', '-', 'Radio', '-', 'TextField', '-', 'Textarea', '-', 'Select', '-', 'Button',]},
+            # '/',
             {'name': 'basicstyles',
                         'items': ['Bold', '-', 'Italic', '-', 'Underline', '-', 'Strike', '-', 'Subscript', '-', 'Superscript', '-', 'RemoveFormat']},
 

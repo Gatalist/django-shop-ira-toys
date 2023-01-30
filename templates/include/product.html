@@ -12,29 +12,29 @@
                 <div class="product-item" style="min-height: 200px;">
                     <div class="single-product position-relative mr-0 ml-0">
                         <div class="product-image">
-                            <a class="d-block" href="{{product.get_absolute_url_my}}">
+                            <a class="d-block" href="{{product.get_absolute_url}}">
                                 <img src="{{ product.poster.url }}" class="product-image-1 w-100" alt="{{ product.title }}">      
                             </a>
                             {% if product.status %}
                                 <span class="onsale">{{ product.status }}</span>
                             {% endif %}
                             <div class="add-action d-flex flex-column position-absolute">
-                                <a href="{{product.get_absolute_url_my}}" title="Подробнее"><i class="lnr lnr-eye" data-placement="left" ></i></a>
+                                <a href="{{product.get_absolute_url}}" title="Подробнее"><i class="lnr lnr-eye" data-placement="left" ></i></a>
                             </div>
                         </div>
                         <div class="product-content"> 
                             <div class="product-title">
-                                <h4 class="title-2"> <a href="{{product.get_absolute_url_my}}">{{ product.title}}</a></h4>
+                                <h4 class="title-2"> <a href="{{product.get_absolute_url}}">{{ product.title}}</a></h4>
                             </div>                             
                             <div class="price-box">
                                 <!-- price -->
                                 {% include "include/price.html" %} 
                             </div>
-                            <button href="{{product.get_absolute_url_my}}" class="btn product-cart">{% trans "Подробнее" %}</button>
+                            <button href="{{product.get_absolute_url}}" class="btn product-cart">{% trans "Подробнее" %}</button>
                         </div>
                         <div class="product-content-listview" style="margin-bottom: -60px">
                             <div class="product-title">
-                                <h4 class="title-2"> <a href="{{product.get_absolute_url_my}}">{{ product.title }}</a></h4>
+                                <h4 class="title-2"> <a href="{{product.get_absolute_url}}">{{ product.title }}</a></h4>
                             </div>
                             <br>
                             <div class="d-flex bd-highlight" style="margin-bottom:10px;">

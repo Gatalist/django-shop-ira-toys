@@ -7,9 +7,8 @@ from .tasks import update_status
 class UpdateStatusPrductAdmin(admin.ModelAdmin):
     list_display = ("id", "title", "upload", "date",)
     list_display_links = ("title",)
-    # readonly_fields = ("title", "upload", "date")
-
-    def save_model(self, request, obj, form, change):
+    
+    def save_model(self, obj):
         obj.save()
         task = obj.id
         return update_status.delay(task)

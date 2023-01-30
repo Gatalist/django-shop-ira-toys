@@ -1,7 +1,11 @@
 {% extends 'product/base.html' %}
-{% load i18n %}
+{% load i18n product_tag %}
 
-{% block title %} {% trans "Корзина заказа" %} {% endblock title %}
+{% block title %}
+    <title>{% trans "Корзина заказа" %}</title>
+{% endblock title %}
+
+{% include "include/head.html" %}
 
 {% block content %}
 <!-- Breadcrumb Image -->
@@ -33,8 +37,8 @@
                                         <td class="first-column">{% trans "Товар" %}</td>
                                         {% for product in products_in_basket %}
                                             <td class="pro-thumbnail" data-td-id="{{product.id}}">
-                                                <a href="{% url 'category_list' %}{{product.product.category.category.slug}}/{{product.product.category.slug}}/{{product.product.slug}}">
-                                                    <img class="img-fluid" src="{{product.poster.url}}" width="100">
+                                                <a href="{{ product.product.get_absolute_url }}">
+                                                    <img class="img-fluid" src="{{ product.poster.url }}" alt="{{ product.alt }}" width="100">
                                                 </a>
                                             </td>
                                         {% endfor %}
@@ -43,7 +47,7 @@
                                         <td class="first-column">{% trans "Название" %}</td>
                                         {% for product in products_in_basket %}
                                             <td class="pro-title" data-td-id="{{product.id}}">
-                                                <a href="{% url 'category_list' %}{{product.product.category.category.slug}}/{{product.product.category.slug}}/{{product.product.slug}}">{{product.product}}</a>
+                                                <a href="{{ product.product.get_absolute_url }}">{{ product.product }}</a>
                                             </td>
                                         {% endfor %}
                                     </tr>
@@ -52,13 +56,13 @@
                                         {% for product in products_in_basket %}
                                             <td class="pro-price" data-td-id="{{product.id}}">
                                                 {% if request.session.valuta == 'USD' %}
-                                                    <span class="pro-price-table">{{product.product.retail_usd}}</span>
+                                                    <span class="pro-price-table">{{ product.product.retail_usd }}</span>
                                                 {% elif request.session.valuta == 'EUR' %}
-                                                    <span class="pro-price-table">{{product.product.retail_eur}}</span>
+                                                    <span class="pro-price-table">{{ product.product.retail_eur }}</span>
                                                 {% elif request.session.valuta == 'ГРН' %}
-                                                    <span class="pro-price-table">{{product.product.retail_uah}}</span>
+                                                    <span class="pro-price-table">{{ product.product.retail_uah }}</span>
                                                 {% else %}
-                                                    <span class="pro-price-table">{{product.product.retail_usd}}</span>
+                                                    <span class="pro-price-table">{{ product.product.retail_usd }}</span>
                                                 {% endif %}
                                                     <span> {{request.session.valuta}}</span>
                                             </td>
@@ -70,9 +74,7 @@
                                             <td class="pro-quantity" data-td-id="{{product.id}}">
                                                 <form class="product-table-plus-minus" action="{% url 'basket_adding' %}">
                                                     {% csrf_token %}
-                                                    
-                                                    <input class="cart-plus-minus-box form-control table-plus-minus" style="max-width:200px; margin: 0 auto;" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{product.nmb}}" type="number" data-id="{{product.id}}" data-image="{{product.poster.url}}">     
-                                                    
+                                                    <input class="cart-plus-minus-box form-control table-plus-minus" style="max-width:200px; margin: 0 auto;" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{product.nmb}}" type="number" data-id="{{product.id}}" data-image="{{product.poster.url}}">
                                                 <form>
                                             </td>
                                         {% endfor %}
@@ -82,15 +84,15 @@
                                         {% for product in products_in_basket %}
                                             <td class="pro-subtotal" data-td-id="{{product.id}}">
                                                 {% if request.session.valuta == 'USD' %}
-                                                    <span class="pro-subtotal-table">{{product.total_price_usd}} </span>
+                                                    <span class="pro-subtotal-table">{{ product.total_price_usd }} </span>
                                                 {% elif request.session.valuta == 'EUR' %}
-                                                    <span class="pro-subtotal-table">{{product.total_price_eur}} </span>
+                                                    <span class="pro-subtotal-table">{{ product.total_price_eur }} </span>
                                                 {% elif request.session.valuta == 'ГРН' %}
-                                                    <span class="pro-subtotal-table">{{product.total_price_uah}} </span>
+                                                    <span class="pro-subtotal-table">{{ product.total_price_uah }} </span>
                                                 {% else %}
-                                                    <span class="pro-subtotal-table">{{product.total_price_usd}} </span>
+                                                    <span class="pro-subtotal-table">{{ product.total_price_usd }} </span>
                                                 {% endif %}
-                                                    <span> {{request.session.valuta}}</span>
+                                                    <span> {{ request.session.valuta }}</span>
                                             </td>
                                         {% endfor %}
                                     </tr>
@@ -123,8 +125,8 @@
                                     <tr class="total">
                                         <td>{% trans "Сумма" %}</td>
                                         <td>
-                                            <span class="total-amount-table">{{all_sum}}</span>
-                                            <span> {{request.session.valuta}}</span>
+                                            <span class="total-amount-table">{{ all_sum }}</span>
+                                            <span> {{ request.session.valuta }}</span>
                                         </td>
                                     </tr>
                                 </table>

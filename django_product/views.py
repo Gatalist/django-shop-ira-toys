@@ -6,6 +6,11 @@ from django.urls.exceptions import Resolver404
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
+# from django.views.generic import TemplateView
+# from django.http import HttpResponse
+# from django.views.decorators.http import require_GET
+# from site_management.models import RobotsTxt
+
 
 def set_language(request, language):
     for lang, _ in LANGUAGES:
@@ -25,9 +30,15 @@ def set_language(request, language):
     return response
 
 
-def error_404(request, exception):
-    return render(request, '404.html', status=404)
+def handler404(request, exception):
+    return render(request, 'errors/404.html', status=404)
 
 
-def error_500(request):
-    return render(request, "500.html", status=500)
+def handler500(request):
+    return render(request, "errors/500.html", status=500)
+
+
+# @require_GET
+# def robots_txt(request):
+#     robots = RobotsTxt.objects.latest("id").text
+#     return HttpResponse(robots, content_type="text/plain")

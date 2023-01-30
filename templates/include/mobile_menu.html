@@ -43,10 +43,12 @@
 								<li class="mega-title has-children"><a href="#">{{category.name}}</a>
 									<ul class="dropdown">
 										<!-- подкатегория -->
-											{% get_sub_categories as sub_categories %}
-											{% for sub_category in sub_categories %}
+										{% get_sub_categories as sub_categories %}
+										{% for sub_category in sub_categories %}
 											{% if sub_category.category == category %}
-												<li style="padding: 10px 15px 8px;"><a href="{% url 'category_list' %}{{category.slug}}/{{sub_category.slug}}">{{ sub_category.name }}</a></li>
+												<li style="padding: 10px 15px 8px;">
+													<a href="{{ sub_category.get_absolute_url }}">{{ sub_category.name }}</a>
+												</li>
 											{% endif %}
 										{% endfor %}
 									</ul>

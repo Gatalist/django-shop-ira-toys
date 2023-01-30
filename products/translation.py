@@ -5,6 +5,7 @@ from .models import Product, Category, SubCategory, Status, Availability, News, 
 @register(Product)
 class ProductTranslationOptions(TranslationOptions):
     fields = ('title', 'material', 'country', 'packaging', 'description',)
+    # fields = ('title', 'material', 'country', 'packaging', 'description', 'meta_title', 'meta_keywords', 'seo_text', 'meta_description', 'meta_og_title', 'meta_og_description')
 
 
 @register(Category)
