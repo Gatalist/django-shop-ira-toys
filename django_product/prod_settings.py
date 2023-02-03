@@ -1,30 +1,24 @@
-import os
+from os import path
 from pathlib import Path
+from os import environ as env
 
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+SECRET_KEY = env["SECRET_KEY"]
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "njf+pl=n!ri$9%&lt)-#$&_-437#%^*^_356?9o)o83c+4^kg^#1pl13sb0r3lf)xc^%"
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1", "104.248.203.111", ".ira-toys-by-7km.com"]
-
+ALLOWED_HOSTS = ["127.0.0.1", env["SERVER_IP"], env["SERVER_DNS"]]
 
 # Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'product',
-        'USER': 'user_db',
-        'PASSWORD': 'She3348Jdfurfghs',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': env["DATABASE_ENGINE"],
+        'NAME': env["NAME"],
+        'USER': env["USER"],
+        'PASSWORD': env["PASSWORD"],
+        'HOST': env["HOST"],
+        'PORT': env["PORT"],
     }
 }
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = path.join(BASE_DIR, 'static/')

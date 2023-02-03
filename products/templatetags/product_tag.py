@@ -4,21 +4,39 @@ from products.models import Category, Product, Reviews, News, SubCategory
 from django_product.settings import news_count_index, reviews_count_index, new_product_data, id_product_new
 # from site_management.models import GoogleAnalytics
 from django.core.cache import cache
-
+from django_product.settings import time_cached_menu
 
 register = template.Library()
+
+# def decorate_category(cat_menu):
+#     def decorate():
+#         cache_categories = cache.get('cache_categories')
+#         if not cache_categories:
+#             cache_categories = cat_menu
+#             cache.set('cache_categories', cache_categories, 60 * time_cached_menu)
+#         print(cache_categories)
+#         return cache_categories
+#     return decorate
 
 
 @register.simple_tag()
 def get_categories():
     """ Рендер категорий в меню """
-    return Category.objects.all()
+    cache_categories = cache.get('cache_categories')
+    if not cache_categories:
+        cache_categories = Category.objects.all()
+        cache.set('cache_categories', cache_categories, 60 * time_cached_menu)
+    return cache_categories
 
 
 @register.simple_tag()
 def get_sub_categories():
     """ Рендер под категорий в меню """
-    return SubCategory.objects.all().select_related('category')
+    cache_categories = cache.get('cache_categories')
+    if not cache_categories:
+        cache_categories = SubCategory.objects.all().select_related('category')
+        cache.set('cache_categories', cache_categories, 60 * time_cached_menu)
+    return cache_categories
 
 
 @register.inclusion_tag("product/tags/last_reviews.html")
@@ -42,12 +60,10 @@ def get_date():
         for x in range (0, new_product_data):
             date = datetime.date.today() - datetime.timedelta(days = x)
             date_txt = str(date).replace(',', '-')
-            product = Product.objects.filter(draft=True, status_id=id_product_new, dateAdd=date).count()
-            if product > 0:
+            product = Product.objects.filter(draft=True, status_id=id_product_new, dateAdd=date)
+            if product:
                 cache_menu.append(date_txt)
-        cache.set('cache_menu', cache_menu, 60 * 10)
-
-    print(cache_menu)
+            cache.set('cache_menu', cache_menu, 60 * time_cached_menu)
     return cache_menu
 
 

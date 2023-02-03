@@ -5,11 +5,9 @@ from django_product.settings import DEFAULT_FROM_EMAIL
 
 def send_to_email(title, to_email, file, html_content):
     irina = 'iratoys33.34@gmail.com'
-    # sergey = 'grachevtoys@gmail.com'
-    test = 'kostencko.alexander2012@gmail.com'
+    developer = 'kostencko.alexander2012@gmail.com'
     try:
-        emailMessage = EmailMultiAlternatives(subject=title, from_email=DEFAULT_FROM_EMAIL, to=[to_email, irina, test])
-        #emailMessage = EmailMultiAlternatives(subject=title, from_email=DEFAULT_FROM_EMAIL, to=[to_email])
+        emailMessage = EmailMultiAlternatives(subject=title, from_email=DEFAULT_FROM_EMAIL, to=[to_email, irina, developer])
         emailMessage.attach_file(file)
         emailMessage.attach_alternative(html_content, "text/html")
         emailMessage.send(fail_silently=False)

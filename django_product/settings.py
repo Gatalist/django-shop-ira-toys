@@ -1,9 +1,10 @@
 from pathlib import Path
 import os
-# from django.utils.translation import gettext_lazy as _
+from os import environ as env
+from dotenv import load_dotenv
 
+load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Application definition
@@ -19,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'django.contrib.sites',
     # 'django.contrib.flatpages',
-    # 'debug_toolbar',   
+    # 'debug_toolbar',
     'ckeditor',
     'ckeditor_uploader',
     'products.apps.ProductsConfig',
@@ -141,16 +142,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 from .ckeditor_settings import *
  
-
 # SITE_ID = 1
 
 #mail settings
-DEFAULT_FROM_EMAIL = 'ira.toys.by7km@gmail.com'  # от кого - почта
+DEFAULT_FROM_EMAIL = env['DEFAULT_FROM_EMAIL']
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ira.toys.by7km@gmail.com'
-EMAIL_HOST_PASSWORD = "ira.toys.by.7km-2021"
-EMAIL_PORT = 587
+EMAIL_HOST = env['EMAIL_HOST']
+EMAIL_HOST_USER = env['DEFAULT_FROM_EMAIL']
+EMAIL_HOST_PASSWORD = env['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = env['EMAIL_PORT']
 EMAIL_USE_TLS = True
 
 product_count_index = 10 # количество новинок на слайдере - главная
@@ -161,10 +161,11 @@ product_in_page = 6 # количество продуктов на страни�
 
 new_product_data = 14 # указываем количество дней за сколько отображать новинки
 id_product_new = 2 # id статуса новинок
+time_cached_menu = 10 # minutes
 
 # redis settings
-REDIS_HOST = '127.0.0.1'
-REDIS_PORT = '6379'
+REDIS_HOST = env['REDIS_HOST']
+REDIS_PORT = env['REDIS_PORT']
 
 # celery
 CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ":" + REDIS_PORT + '/0'

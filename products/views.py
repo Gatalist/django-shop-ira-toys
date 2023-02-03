@@ -36,6 +36,7 @@ class ProductView(ListView):
 
     def get_queryset(self):
         product = Product.objects.filter(draft=True, category__slug=self.kwargs['subcategory']).select_related('category', 'availability', 'status')
+        # product = Product.objects.filter(draft=True, category__slug=self.kwargs['subcategory']).prefetch_related('category', 'availability', 'status')
         return product
 
     def get_context_data(self, **kwargs):

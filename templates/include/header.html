@@ -20,6 +20,25 @@
 								{% url 'index' as index_url %}
 								<a href="{% url 'index' %}" {% if request.path == index_url %} class="active" {% endif %}>{% trans "Главная" %}</a>
 							</li>
+							{% comment %} <li>
+								{% url 'category_list' as category_list_url %}
+								<a href="{% url 'category_list' %}" {% if request.path == category_list_url %} class="active" {% endif %}>{% trans "Каталог" %}<span class="fa fa-angle-down"></span></a>
+								<ul class="submenu">
+									{% get_categories as categories %}
+									{% for category in categories %}
+										<li><a href=""><a href="{{ category.get_absolute_url }}">{{ category.name }}<span class="fa fa-angle-down"></a></span></a>
+											<ul class="submenu">
+												{% get_sub_categories as sub_categories %}
+												{% for sub_category in sub_categories %}
+													{% if sub_category.category == category %}
+														<li><a href="{{ sub_category.get_absolute_url }}">{{sub_category.name}}</a></li>
+													{% endif %}
+												{% endfor %}
+											</ul>
+										</li>
+									{% endfor %}
+								</ul>
+							</li> {% endcomment %}
 							<li>
 								{% url 'category_list' as category_list_url %}
 								<a href="{% url 'category_list' %}" {% if request.path == category_list_url %} class="active" {% endif %}>{% trans "Каталог" %}<span class="fa fa-angle-down"></span></a>
