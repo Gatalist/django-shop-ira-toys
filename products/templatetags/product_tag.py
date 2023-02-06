@@ -22,21 +22,23 @@ register = template.Library()
 @register.simple_tag()
 def get_categories():
     """ Рендер категорий в меню """
-    cache_categories = cache.get('cache_categories')
-    if not cache_categories:
-        cache_categories = Category.objects.all()
-        cache.set('cache_categories', cache_categories, 60 * time_cached_menu)
-    return cache_categories
+    # cache_categories = cache.get('cache_categories')
+    # if not cache_categories:
+    #     cache_categories = Category.objects.all()
+    #     cache.set('cache_categories', cache_categories, 60 * time_cached_menu)
+    # return cache_categories
+    return Category.objects.all()
 
 
 @register.simple_tag()
 def get_sub_categories():
     """ Рендер под категорий в меню """
-    cache_categories = cache.get('cache_categories')
-    if not cache_categories:
-        cache_categories = SubCategory.objects.all().select_related('category')
-        cache.set('cache_categories', cache_categories, 60 * time_cached_menu)
-    return cache_categories
+    # cache_categories = cache.get('cache_categories')
+    # if not cache_categories:
+    #     cache_categories = SubCategory.objects.all().select_related('category')
+    #     cache.set('cache_categories', cache_categories, 60 * time_cached_menu)
+    # return cache_categories
+    return SubCategory.objects.all().select_related('category')
 
 
 @register.inclusion_tag("product/tags/last_reviews.html")

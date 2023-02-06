@@ -17,12 +17,12 @@
 			</li>
 			<li class="sidemenu-wrap">
 				<select class="form-controls" style="font-weight: bold; background: transparent; border: none" id='valuta'>
-					{% if request.session.valuta == 'USD' %}
-						<option selected value="USD">USD</option>
-						<option value="ГРН">ГРН</option>
-					{% elif request.session.valuta == 'ГРН' %}
+					{% if request.session.valuta == 'ГРН' %}
 						<option selected value="ГРН">ГРН</option>
 						<option value="USD">USD</option>
+					{% else %}
+						<option selected value="USD">USD</option>
+						<option value="ГРН">ГРН</option>
 					{% endif %}
 				</select>
 			</li>
@@ -50,27 +50,32 @@
 										<div class="container">
 											<div class="row">
 												<div class="col-3" >
-													<a href="{{product.get_absolute_url_my}}">
+													<a href="{{product.get_absolute_url}}">
 														<img class="img" style="display: block" src="{{product.product.poster.url}}" alt="">
 													</a>										
 												</div>
 												<div class="col-9" style="top: -50px">
-													<a href="{{product.get_absolute_url_my}}" style="display: block">
+													<a href="{{product.get_absolute_url}}" style="display: block">
 														<h5 class="title">{{product.product}}</h5>
 													</a>																				
 													<span class="number">{{product.nmb}} </span>
+													
 													<span> × </span>
-													{% if request.session.valuta == 'USD' %}
-														<span class="summ">{{product.product.retail_usd}}</span>
-													{% elif request.session.valuta == 'ГРН' %}
+													
+													{% if request.session.valuta == 'ГРН' %}
 														<span class="summ">{{product.product.retail_uah}}</span>
+													{% else %}
+														<span class="summ">{{product.product.retail_usd}}</span>
 													{% endif %}
+
 													<span> = </span>
-													{% if request.session.valuta == 'USD' %}
-														<span class="cart-price" style="color: #d63384;"><b>{{product.total_price_usd}}</b></span>
-													{% elif request.session.valuta == 'ГРН' %}
+
+													{% if request.session.valuta == 'ГРН' %}
 														<span class="cart-price" style="color: #d63384;"><b>{{product.total_price_uah}}</b></span>
+													{% else %}
+														<span class="cart-price" style="color: #d63384;"><b>{{product.total_price_usd}}</b></span>
 													{% endif %}
+										
 														<span style="color: #d63384;"><b> {{request.session.valuta}}</b></span>
 													<button class="pro-remove" data-id="{{product.id}}"> 
 														<i class="lnr lnr-trash"></i>

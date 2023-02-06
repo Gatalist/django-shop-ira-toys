@@ -13,11 +13,11 @@ ALLOWED_HOSTS = ["127.0.0.1", env["SERVER_IP"], env["SERVER_DNS"]]
 DATABASES = {
     'default': {
         'ENGINE': env["DATABASE_ENGINE"],
-        'NAME': env["NAME"],
-        'USER': env["USER"],
-        'PASSWORD': env["PASSWORD"],
-        'HOST': env["HOST"],
-        'PORT': env["PORT"],
+        'NAME': env["DATABASE_NAME"],
+        'USER': env["DATABASE_USER"],
+        'PASSWORD': env["DATABASE_PASSWORD"],
+        'HOST': env["DATABASE_HOST"],
+        'PORT': env["DATABASE_PORT"],
     }
 }
 

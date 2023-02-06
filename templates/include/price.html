@@ -1,9 +1,9 @@
 <h3 class="card-title pricing-card-title text-success">
     <b>
-        {% if request.session.valuta == 'USD' %}
-            {{product.retail_usd}}
-        {% elif request.session.valuta == 'ГРН' %}
+        {% if request.session.valuta == 'ГРН' %}
             {{product.retail_uah}}
+        {% else %}
+            {{product.retail_usd}}
         {% endif %}
         {{request.session.valuta}}
     </b>
